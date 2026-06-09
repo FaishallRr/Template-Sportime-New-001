@@ -21,6 +21,15 @@ services:
       - ./migrations/005_soft_delete_and_promos.sql:/docker-entrypoint-initdb.d/005_soft_delete_and_promos.sql
       - ./migrations/006_fix_missing_columns.sql:/docker-entrypoint-initdb.d/006_fix_missing_columns.sql
       - ./migrations/007_sport_type.sql:/docker-entrypoint-initdb.d/007_sport_type.sql
+      - ./migrations/008_venue_slug.sql:/docker-entrypoint-initdb.d/008_venue_slug.sql
+      - ./migrations/009_withdrawal_admin_fee.sql:/docker-entrypoint-initdb.d/009_withdrawal_admin_fee.sql
+      - ./migrations/010_slot_unique_constraint.sql:/docker-entrypoint-initdb.d/010_slot_unique_constraint.sql
+      - ./migrations/011_daily_report_time.sql:/docker-entrypoint-initdb.d/011_daily_report_time.sql
+      - ./migrations/013_create_notifications.sql:/docker-entrypoint-initdb.d/013_create_notifications.sql
+      - ./migrations/014_tripay_payments.sql:/docker-entrypoint-initdb.d/014_tripay_payments.sql
+      - ./migrations/015_perf_indexes.sql:/docker-entrypoint-initdb.d/015_perf_indexes.sql
+      - ./migrations/017_reseed.sql:/docker-entrypoint-initdb.d/017_reseed.sql
+      - ./migrations/018_fix_images.sql:/docker-entrypoint-initdb.d/018_fix_images.sql
       - ./migrations/019_seed_reviews.sql:/docker-entrypoint-initdb.d/019_seed_reviews.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U padel -d padelpoint"]
