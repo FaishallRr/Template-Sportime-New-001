@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#c7d4fa",
+                        "primary-fixed": "#cafd00",
+                        "primary": "#4e6300",
+                        "surface": "#f6f6ff",
+                        "tertiary-fixed-dim": "#ccd7ef",
+                        "on-surface": "#272e42",
+                        "secondary-fixed": "#e0e3e5",
+                        "primary-container": "#cafd00",
+                        "on-error": "#ffefec",
+                        "tertiary-dim": "#455064",
+                        "on-primary-fixed": "#3a4a00",
+                        "surface-container-low": "#eef0ff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#959cb5",
+                        "on-secondary": "#f1f3f5",
+                        "inverse-primary": "#cafd00",
+                        "tertiary-container": "#dae6fe",
+                        "secondary": "#595c5e",
+                        "on-secondary-container": "#4f5254",
+                        "on-secondary-fixed-variant": "#595c5e",
+                        "tertiary": "#515c70",
+                        "on-primary-fixed-variant": "#526900",
+                        "outline-variant": "#a5adc6",
+                        "on-secondary-fixed": "#3c4042",
+                        "on-background": "#272e42",
+                        "error": "#b02500",
+                        "error-container": "#f95630",
+                        "on-tertiary": "#eff2ff",
+                        "on-primary": "#e1ff88",
+                        "surface-bright": "#f6f6ff",
+                        "surface-variant": "#d1dcff",
+                        "on-primary-container": "#4a5e00",
+                        "surface-container-high": "#d9e2ff",
+                        "on-error-container": "#520c00",
+                        "tertiary-fixed": "#dae6fe",
+                        "on-tertiary-fixed-variant": "#535e72",
+                        "secondary-dim": "#4d5052",
+                        "on-tertiary-fixed": "#374155",
+                        "outline": "#6f768e",
+                        "on-surface-variant": "#535b71",
+                        "primary-fixed-dim": "#beee00",
+                        "on-tertiary-container": "#495468",
+                        "error-dim": "#b92902",
+                        "primary-dim": "#435600",
+                        "inverse-surface": "#060e20",
+                        "background": "#f6f6ff",
+                        "surface-container-highest": "#d1dcff",
+                        "surface-tint": "#4e6300",
+                        "secondary-container": "#e0e3e5",
+                        "secondary-fixed-dim": "#d2d5d7",
+                        "surface-container": "#e2e7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(209, 220, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .btn-3d {
+            box-shadow: 0 4px 0 0 #3a4a00;
+        }
+        .btn-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 #3a4a00;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl shadow-sm docked full-width top-0 sticky z-50 bg-gradient-to-b from-slate-200/20 to-transparent">
+<nav class="flex justify-between items-center w-full px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black italic text-slate-900 dark:text-white tracking-tighter">PadelPoint Semarang</span>
+</div>
+<div class="hidden md:flex items-center gap-8 font-plus-jakarta-sans tracking-tight">
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-lime-500 transition-colors duration-300" href="#">Explore</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-lime-500 transition-colors duration-300" href="#">My Bookings</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-lime-500 transition-colors duration-300" href="#">Profile</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold scale-95 active:scale-90 transition-transform">Book Now</button>
+</nav>
+</header>
+<main class="flex-grow max-w-7xl mx-auto w-full px-6 py-12 lg:py-20">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Payment & Options Column -->
+<div class="lg:col-span-7 space-y-10">
+<!-- Promo Code -->
+<section>
+<h2 class="text-headline-lg font-bold tracking-tight mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="confirmation_number">confirmation_number</span>
+                        Have a Promo Code?
+                    </h2>
+<div class="flex gap-3">
+<input class="flex-grow bg-surface-container-highest border-none rounded-xl px-6 py-4 focus:ring-2 focus:ring-primary/40 placeholder:text-outline outline-none" placeholder="Enter code here..." type="text"/>
+<button class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-bold hover:bg-secondary-fixed transition-colors">Apply</button>
+</div>
+</section>
+<!-- Payment Methods -->
+<section>
+<div class="flex justify-between items-end mb-6">
+<h2 class="text-headline-lg font-bold tracking-tight">Payment Method</h2>
+<span class="text-label-md uppercase tracking-widest text-primary font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+                            Secure Payment
+                        </span>
+</div>
+<div class="space-y-4">
+<!-- QRIS -->
+<label class="group relative flex items-center justify-between p-6 rounded-xl bg-surface-container-lowest hover:bg-surface-bright cursor-pointer transition-all duration-300">
+<div class="flex items-center gap-4">
+<input class="w-5 h-5 text-primary border-outline focus:ring-primary" name="payment" type="radio"/>
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">QRIS</span>
+<span class="text-sm text-outline">Scan with any banking or e-wallet app</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<img class="h-6 opacity-80" data-alt="Official QRIS logo showing the unified Indonesian QR standard icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA38oSD5vGUv6B4Xvxx6t0Qh23x4co6-vj_xW58xiguHeyAA5Fe_182OQXU_s194v7IaqxL6UFTRu0ApoqAwqyIjfAMy9Nf6YgrpfgKoHVeufYeobRwawdnEGxmiVeUspFuukxF94vPysiMTwESAzaPpIe4NJXixczevXXyoUmiTo4v2fXJAqE5N0zTaFWBisix2FYq18ocqRWWCUkow5uV0E1veW7zfyA91wabJpuFKehukUU75kkQCgwvhNfjtgUcWtTFzWT4Sy9-"/>
+</div>
+</label>
+<!-- Virtual Account -->
+<label class="group relative flex items-center justify-between p-6 rounded-xl bg-surface-container-lowest hover:bg-surface-bright cursor-pointer transition-all duration-300">
+<div class="flex items-center gap-4">
+<input class="w-5 h-5 text-primary border-outline focus:ring-primary" name="payment" type="radio"/>
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Virtual Account</span>
+<span class="text-sm text-outline">BCA, Mandiri, BNI, or BRI</span>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="account_balance">account_balance</span>
+</div>
+</label>
+<!-- E-Wallet -->
+<label class="group relative flex flex-col p-6 rounded-xl bg-surface-container-lowest hover:bg-surface-bright cursor-pointer transition-all duration-300 border-2 border-transparent has-[:checked]:border-primary/20">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-4">
+<input checked="" class="w-5 h-5 text-primary border-outline focus:ring-primary" name="payment" type="radio"/>
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">E-Wallet</span>
+<span class="text-sm text-outline">ShopeePay, GoPay, OVO</span>
+</div>
+</div>
+</div>
+<div class="flex gap-4 ml-9">
+<div class="bg-surface-container-low px-4 py-2 rounded-lg grayscale hover:grayscale-0 transition-all cursor-pointer">
+<img class="h-4" data-alt="ShopeePay logo with distinct orange branding" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaD_U41uWtOszcxwLtkBHUX-B7uvy6qEQn0lcgpd7H1nckaixkCQaxvlkdNUmiffk2qJ9kQALaGRV68MhXIDhok8Ef0y_xxsPF4-NL7_EaKC-HdotSjDriv5rpbIjJAwrS18sX23_yJN6JQDFTqSLpVN6uzTmXXK2D_VyakwJnUSVGMkncG_OKUiQ1dFURp_i5bJgyWZ9a8Bi-8cijQ9L9ysjAdq5ntq_wYDrdYngtybKF5_dvouspBzl1lOat-qP9I7iIfclSliZ8"/>
+</div>
+<div class="bg-surface-container-low px-4 py-2 rounded-lg grayscale hover:grayscale-0 transition-all cursor-pointer">
+<img class="h-4" data-alt="GoPay logo with modern blue and white typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF67HTboIVCVPnBvPiqw_JGedXwqc1uNJ9Ji_sS5Quh__f8Ep0DEJDqz-0pAGfWABwhZ9qVEvqkMCF7GZ7jOu_OEu085s_Q-sG58w5JUGPvPOX3jWYL4baKcgfk7i584-rC9rhrNVzE8x9llZa5RhYX39tARssbk0mEaFGqjkVnQ2tHQXMA0kk0mYDHGXjqnx9YuWBJbhIJfzbyfU4WPyScOvGhi0HjweWXFuT83UyLXUiAMrWYUHGWWpA4EXWUtlUG2KJGeUzYVlI"/>
+</div>
+<div class="bg-surface-container-low px-4 py-2 rounded-lg grayscale hover:grayscale-0 transition-all cursor-pointer">
+<img class="h-4" data-alt="OVO payment logo with purple and white corporate style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZhhh-HHTV8EQ7gOW8GEIvQfrqf9BkM6UJIl5qEIY0keBevg2TAXJR6MvAWHEEgG0Q-uBWEtL3Lpj0mWgvGLntzoPn5RIPIT9oB-Iv3qaMvF97hEksQnEsmDjHzMsSJxa-wNimRnmRZMD6GVlNl3kTkjOmQndU7EMEPUhJwDkpV-qviUWIY9W1mIGBB1N7xWdnS3-myK1K3z3JrbZUO62jSeyYvoXr0Rg07BtRhbz9UHhjsmLuKjw42wvyHtbPuuIN1_WnY8XUeAOM"/>
+</div>
+</div>
+</label>
+</div>
+</section>
+<!-- Terms -->
+<div class="flex items-start gap-3 p-4">
+<input class="mt-1 w-5 h-5 text-primary rounded border-outline focus:ring-primary" id="terms" type="checkbox"/>
+<label class="text-sm text-on-surface-variant leading-relaxed" for="terms">
+                        I agree to the <a class="text-primary font-bold hover:underline" href="#">Terms of Service</a> and <a class="text-primary font-bold hover:underline" href="#">Cancellation Policy</a>. I understand that bookings are non-refundable within 24 hours of the start time.
+                    </label>
+</div>
+</div>
+<!-- Summary Sidebar Column -->
+<div class="lg:col-span-5">
+<div class="sticky top-28 space-y-6">
+<!-- Order Summary Card -->
+<div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm relative overflow-hidden">
+<!-- Glass Decorative Element -->
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+<h3 class="text-headline-md font-bold tracking-tight mb-8">Booking Summary</h3>
+<div class="space-y-6 mb-8">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="sports_tennis">sports_tennis</span>
+</div>
+<div>
+<p class="text-label-md uppercase tracking-wider text-outline mb-0.5">Venue</p>
+<p class="font-bold text-lg">PadelPoint Semarang - Court 2</p>
+<p class="text-sm text-on-surface-variant">Kinetic Glass Court Experience</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_today">calendar_today</span>
+</div>
+<div>
+<p class="text-label-md uppercase tracking-wider text-outline mb-0.5">Date &amp; Time</p>
+<p class="font-bold text-lg">Saturday, Oct 12, 2024</p>
+<p class="text-sm text-on-surface-variant">18:00 - 19:30 (90 Minutes)</p>
+</div>
+</div>
+</div>
+<!-- Price Breakdown -->
+<div class="pt-6 border-t border-surface-container-low space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Court Rental</span>
+<span class="font-medium">Rp 450.000</span>
+</div>
+<!-- Split Payment Logic -->
+<div class="bg-surface-container-low/50 p-4 rounded-xl border border-primary/10">
+<div class="flex justify-between items-center mb-1">
+<div class="flex items-center gap-2">
+<span class="text-on-surface-variant">Service Fee</span>
+<span class="material-symbols-outlined text-outline text-base cursor-help" data-icon="info">info</span>
+</div>
+<span class="font-medium">Rp 7.500</span>
+</div>
+<p class="text-xs text-on-tertiary-fixed-variant leading-tight">This transparent fee helps us maintain the glass courts and provide 24/7 technical support.</p>
+</div>
+<div class="flex justify-between items-center pt-4">
+<span class="text-lg font-bold">Total Amount</span>
+<span class="text-2xl font-black text-primary">Rp 457.500</span>
+</div>
+</div>
+<!-- CTA Button -->
+<button class="w-full mt-8 bg-primary-fixed text-on-primary-fixed py-5 rounded-full text-lg font-black tracking-tight btn-3d transition-all flex items-center justify-center gap-3">
+                            PAY NOW
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<div class="mt-6 flex items-center justify-center gap-4 grayscale opacity-40">
+<img class="h-4" data-alt="Visa credit card payment logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUabtXVTT95ZTqdR1fCKbDDA6_jnOsI1xi4dUc5ScLRF7CEhjJ9NlSsaOB2c9l0sMJOwAD99lmlJ6mmpyEqjNL-lc8dp0JOrZCrZ7UwtZpIigN4bMou7vMdPqhM8BRiq0k5dBDYT3W9B2tEpb-OSQSBAI67gUVgDZIgSKLZ-qyZKa9XafzxLC6HmEx7Lnk4aLmObVuLB5i76ljE8VrHHiLqHOeVEtaDM071iOCEGbiWp51GyeG_yRvYrxsZc5jt403NcBoaiM82ulQ"/>
+<img class="h-6" data-alt="Mastercard credit card payment logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBea0cAMYg-DGk5tn8hlRwPEcRZCjNGKO4Xr9Umu4f9Ipedeq92UDnlXi7QA1pqdXFKXseXvu1JSyM2j8C37abX2b12kOmg-3wIO83RCsnxPzC8TJddGqHSJ8siE6GjjY5Bv_I7c9qowQ5g8NTEgpa2rC5jjtozRw-eiETfM-6d9Kv1h-JUWYjH7teMRSVqxnbI1TsnoTg0HHquh4PqfN_sRmWg_A2yRKlo4z0qhPO5NHs3bA5PqL0Gojj1HtzI9BMdkDtc4OrYJKm3"/>
+<img class="h-5" data-alt="PCI DSS secure payment certification logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjMJ0kddeAvTA9lywq_foD7koU6ivxxD-Zmhf6FgMO8urX3PE2R2eIZoegxLMgHZirVkXbNI1P0QjFEkvzuPzK70EeSdm6QthuNXUJ7A93l3Hb5LajfIBzMVgR2HkmqDlcxVCiFEzmrZHUh9lKDopl6FqBjDS8vyGCUskhXOnWP71ycnyGG29PCBWDiKWNnKMGZI-Rtm66HIPivXH8GU5ZUt6J6fBmDTP4ESp8LfzadETdf830BrvBLvne3YhgjsER92Ypn24-SDCS"/>
+</div>
+</div>
+<!-- Security Badge -->
+<div class="flex items-center gap-4 px-4 py-3 bg-primary/5 rounded-2xl">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<p class="text-xs font-medium text-on-primary-fixed-variant">
+                            Your transaction is encrypted. We do not store your full card details.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 w-full mt-auto border-t border-slate-200/50 dark:border-slate-800/50">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 py-12 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<span class="text-xl font-black text-slate-900 dark:text-white mb-4 block">PadelPoint Semarang</span>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-plus-jakarta-sans leading-relaxed">
+                    © 2024 PadelPoint Semarang. The Kinetic Glass Court Experience.
+                </p>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-4">Explore</h4>
+<ul class="space-y-2 text-sm font-plus-jakarta-sans">
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Semarang Area</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Partner Registration</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-4">Support</h4>
+<ul class="space-y-2 text-sm font-plus-jakarta-sans">
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Contact Us</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 opacity-80 hover:opacity-100 transition-opacity" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-4">Secure Payment</h4>
+<div class="flex flex-wrap gap-4 opacity-60">
+<span class="material-symbols-outlined" data-icon="credit_card">credit_card</span>
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="material-symbols-outlined" data-icon="qr_code_2">qr_code_2</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

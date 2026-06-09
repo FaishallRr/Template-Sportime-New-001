@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PadelPoint Semarang - Main Padel Lebih Mudah</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/framer-motion@11.0.3/dist/framer-motion.js"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#c7d4fa",
+                    "primary-fixed": "#cafd00",
+                    "primary": "#4e6300",
+                    "surface": "#f6f6ff",
+                    "tertiary-fixed-dim": "#ccd7ef",
+                    "on-surface": "#272e42",
+                    "secondary-fixed": "#e0e3e5",
+                    "primary-container": "#cafd00",
+                    "on-error": "#ffefec",
+                    "tertiary-dim": "#455064",
+                    "on-primary-fixed": "#3a4a00",
+                    "surface-container-low": "#eef0ff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#959cb5",
+                    "on-secondary": "#f1f3f5",
+                    "inverse-primary": "#cafd00",
+                    "tertiary-container": "#dae6fe",
+                    "secondary": "#595c5e",
+                    "on-secondary-container": "#4f5254",
+                    "on-secondary-fixed-variant": "#595c5e",
+                    "tertiary": "#515c70",
+                    "on-primary-fixed-variant": "#526900",
+                    "outline-variant": "#a5adc6",
+                    "on-secondary-fixed": "#3c4042",
+                    "on-background": "#272e42",
+                    "error": "#b02500",
+                    "error-container": "#f95630",
+                    "on-tertiary": "#eff2ff",
+                    "on-primary": "#e1ff88",
+                    "surface-bright": "#f6f6ff",
+                    "surface-variant": "#d1dcff",
+                    "on-primary-container": "#4a5e00",
+                    "surface-container-high": "#d9e2ff",
+                    "on-error-container": "#520c00",
+                    "tertiary-fixed": "#dae6fe",
+                    "on-tertiary-fixed-variant": "#535e72",
+                    "secondary-dim": "#4d5052",
+                    "on-tertiary-fixed": "#374155",
+                    "outline": "#6f768e",
+                    "on-surface-variant": "#535b71",
+                    "primary-fixed-dim": "#beee00",
+                    "on-tertiary-container": "#495468",
+                    "error-dim": "#b92902",
+                    "primary-dim": "#435600",
+                    "inverse-surface": "#060e20",
+                    "background": "#f6f6ff",
+                    "surface-container-highest": "#d1dcff",
+                    "surface-tint": "#4e6300",
+                    "secondary-container": "#e0e3e5",
+                    "secondary-fixed-dim": "#d2d5d7",
+                    "surface-container": "#e2e7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #4e6300 0%, #cafd00 100%);
+        }
+        .text-shadow-sm {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* 3D Tilt Effect */
+        .tilt-card {
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            transform-style: preserve-3d;
+        }
+        .tilt-card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateY(-8px);
+        }
+
+        /* Moving Gradients */
+        @keyframes move-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .kinetic-bg {
+            background: linear-gradient(-45deg, #f6f6ff, #eef0ff, #e2e7ff, #f6f6ff);
+            background-size: 400% 400%;
+            animation: move-gradient 15s ease infinite;
+        }
+
+        /* 3D Button Press */
+        .btn-3d {
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 0 0 rgba(78, 99, 0, 0.3);
+        }
+        .btn-3d:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 0 rgba(78, 99, 0, 0.3);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface kinetic-bg">
+<!-- TopNavBar -->
+<nav class="bg-white/40 backdrop-blur-2xl shadow-sm fixed top-0 w-full z-50 transition-all duration-300">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-screen-2xl mx-auto font-plus-jakarta-sans tracking-tight">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black italic text-slate-900 dark:text-white tracking-tighter">PadelPoint Semarang</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-lime-600 dark:text-lime-400 font-bold border-b-2 border-lime-500 hover:text-lime-500 transition-colors duration-300" href="#">Explore</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-lime-500 transition-colors duration-300" href="#">My Bookings</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-lime-500 transition-colors duration-300" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary-fixed text-on-primary-fixed px-6 py-2.5 rounded-full font-bold scale-95 active:scale-90 transition-transform shadow-lg shadow-primary/20 btn-3d">Book Now</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center pt-20 overflow-hidden">
+<div class="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
+<div class="absolute top-20 right-[-10%] w-[600px] h-[600px] bg-primary rounded-full blur-[120px]"></div>
+<div class="absolute bottom-20 left-[-5%] w-[400px] h-[400px] bg-primary-fixed rounded-full blur-[100px]"></div>
+</div>
+<!-- Floating 3D Ball Element -->
+<div class="absolute top-[20%] right-[40%] pointer-events-none z-0 floating-element opacity-20 hidden lg:block">
+<div class="w-24 h-24 rounded-full bg-primary-fixed shadow-[inset_-8px_-8px_20px_rgba(0,0,0,0.2),8px_8px_20px_rgba(255,255,255,0.5)]"></div>
+</div>
+<div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+<div class="space-y-8 reveal">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-low text-primary font-bold text-sm tracking-wide uppercase shadow-inner">
+<span class="material-symbols-outlined text-sm">sports_tennis</span> Semarang's Premier Padel Network
+                </div>
+<h1 class="text-6xl md:text-7xl font-black text-on-surface tracking-tighter leading-[0.95]">
+                    Main Padel Lebih <br/><span class="text-primary-dim">Mudah</span> di Semarang
+                </h1>
+<p class="text-xl text-on-surface-variant max-w-lg leading-relaxed">
+                    Booking lapangan favoritmu secara instan, tanpa ribet. Rasakan pengalaman bermain di court kelas dunia dengan komunitas yang seru.
+                </p>
+<!-- Search Bar -->
+<div class="p-2 glass-panel rounded-2xl shadow-xl shadow-on-surface/5 flex flex-col md:flex-row items-stretch md:items-center gap-2 max-w-2xl border border-white/40">
+<div class="flex-1 flex items-center px-4 gap-3">
+<span class="material-symbols-outlined text-outline">location_on</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface py-4 font-medium" placeholder="Cari venue di Semarang..." type="text"/>
+</div>
+<div class="w-px h-8 bg-outline-variant/20 hidden md:block"></div>
+<div class="flex-1 flex items-center px-4 gap-3">
+<span class="material-symbols-outlined text-outline">calendar_month</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface py-4 font-medium" placeholder="Pilih Tanggal" type="text"/>
+</div>
+<button class="bg-primary px-8 py-4 rounded-xl text-primary-fixed font-bold flex items-center justify-center gap-2 hover:bg-on-primary-container transition-all btn-3d">
+<span class="material-symbols-outlined">search</span> Search
+                    </button>
+</div>
+</div>
+<div class="relative group reveal">
+<div class="absolute -inset-4 bg-primary/10 rounded-[2.5rem] rotate-3 blur-sm group-hover:rotate-2 transition-transform duration-500"></div>
+<div class="relative rounded-[2.5rem] overflow-hidden aspect-[4/5] shadow-2xl tilt-card">
+<img class="w-full h-full object-cover" data-alt="Modern indoor padel court with blue turf, glass walls, and bright professional stadium lighting in a contemporary sports facility" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmtPRv5VfRtKi1dVKHAhs1eCAd86cmFkXJFyVKHrrBLPfqZoEtkMfLA0bejMZQgtLTdxzNcnkjdfC6hGC1nxeXnLxObnHreOmu2j_Wncx23Ax-9i0Ck4mJh2eUb5z5DE8a9ltSdFh5ZtxoU4XBc1E-jG6hodXfiLKkyUZY8I4Nb0OaO5hP-q1p1V1WEx6liGDiSzYj8erO6azG0mUUOSRPr2bTeRhmb-vi2gu9SPo6mI14Jgd-7x9X5bO0Z5qyMx8dKS4eZ2jp0dFX"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8 glass-panel p-6 rounded-2xl border border-white/20">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-white/80 text-sm font-medium">Next Match in 15 mins</p>
+<p class="text-white text-lg font-bold">PadelPoint Tembalang</p>
+</div>
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-xs font-black animate-pulse">LIVE</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Badges -->
+<div class="bg-surface-container-low/50 backdrop-blur-md py-10 reveal">
+<div class="container mx-auto px-6 flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="flex items-center gap-2">
+<span class="font-black text-2xl text-on-surface">Midtrans</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-dim" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-bold text-xl text-on-surface">WhatsApp Official</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-bold text-2xl text-on-surface">Padelindo</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-black italic text-2xl text-on-surface">SemarangSport</span>
+</div>
+</div>
+</div>
+<!-- How It Works -->
+<section class="py-24">
+<div class="container mx-auto px-6 text-center mb-16 reveal">
+<h2 class="text-4xl md:text-5xl font-black text-on-surface tracking-tighter mb-4">Cara Booking <span class="text-primary-dim">Gampang</span></h2>
+<p class="text-on-surface-variant text-lg max-w-2xl mx-auto">Tiga langkah mudah untuk memulai petualangan padel Anda di Semarang hari ini.</p>
+</div>
+<div class="container mx-auto px-6 grid md:grid-cols-3 gap-8">
+<!-- Step 1 -->
+<div class="group relative p-8 rounded-[2rem] glass-panel border border-white/50 hover:shadow-2xl transition-all duration-500 tilt-card reveal">
+<div class="w-16 h-16 rounded-2xl hero-gradient flex items-center justify-center text-on-primary mb-6 shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">search</span>
+</div>
+<h3 class="text-2xl font-bold mb-3">Cari Lapangan</h3>
+<p class="text-on-surface-variant leading-relaxed">Pilih lokasi venue padel terdekat dari posisimu dengan fasilitas terbaik di Semarang.</p>
+<div class="absolute top-8 right-8 text-6xl font-black text-surface-container-highest opacity-50">01</div>
+</div>
+<!-- Step 2 -->
+<div class="group relative p-8 rounded-[2rem] glass-panel border border-white/50 hover:shadow-2xl transition-all duration-500 md:translate-y-4 tilt-card reveal">
+<div class="w-16 h-16 rounded-2xl hero-gradient flex items-center justify-center text-on-primary mb-6 shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">event_available</span>
+</div>
+<h3 class="text-2xl font-bold mb-3">Booking Instan</h3>
+<p class="text-on-surface-variant leading-relaxed">Pilih jadwal kosong, konfirmasi pembayaran, dan kode akses akan dikirim langsung ke WhatsApp-mu.</p>
+<div class="absolute top-8 right-8 text-6xl font-black text-surface-container-highest opacity-50">02</div>
+</div>
+<!-- Step 3 -->
+<div class="group relative p-8 rounded-[2rem] glass-panel border border-white/50 hover:shadow-2xl transition-all duration-500 tilt-card reveal">
+<div class="w-16 h-16 rounded-2xl hero-gradient flex items-center justify-center text-on-primary mb-6 shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">sports_tennis</span>
+</div>
+<h3 class="text-2xl font-bold mb-3">Mulai Main</h3>
+<p class="text-on-surface-variant leading-relaxed">Tunjukkan kode booking ke resepsionis atau scan di gate otomatis. Waktunya smash!</p>
+<div class="absolute top-8 right-8 text-6xl font-black text-surface-container-highest opacity-50">03</div>
+</div>
+</div>
+</section>
+<!-- Featured Venues -->
+<section class="py-24 bg-surface-container-low/30 overflow-hidden">
+<div class="container mx-auto px-6 flex justify-between items-end mb-12 reveal">
+<div>
+<h2 class="text-4xl md:text-5xl font-black text-on-surface tracking-tighter mb-4">Venue <span class="text-primary-dim">Terpopuler</span></h2>
+<p class="text-on-surface-variant text-lg">Pilihan court terbaik dengan standar internasional.</p>
+</div>
+<button class="hidden md:flex items-center gap-2 font-bold text-primary hover:gap-4 transition-all">
+                Lihat Semua Venue <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="container mx-auto px-6 grid md:grid-cols-3 gap-8">
+<!-- Venue Card 1 -->
+<div class="group bg-white/60 backdrop-blur-md rounded-[2rem] overflow-hidden border border-white/40 shadow-sm hover:shadow-2xl transition-all duration-500 tilt-card reveal">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Aerial view of a luxury rooftop padel court with bright green turf and glass walls overlooking a cityscape" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrjBmuqUbFEIHf-tWIuAQLGY56Dcvog6Lh8uOcP_mWrY6lPPjiqQhj1IO0_k6HeqbfPoPwFNUZ_fty_U2nkZniGxLRCqydsWp5LRzcphY-UVBa-0X-hHgFo7AP2UScb4Kd5lwL-Qi5OTakTwWvFP4bVavayVMizrKztSJr8h-4SoVi2AmqZVeJl4TaTYHEtmM6RclVA33McQWudFEY6S2LoiNzKASu71Lsv3zGL6e8ut2WB6ICCnOcGvarc2Ky-evQWp8K9RBfZoHY"/>
+<div class="absolute top-4 right-4 glass-panel px-4 py-2 rounded-full flex items-center gap-1 border border-white/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-on-surface font-bold text-sm">4.9</span>
+</div>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-2xl font-bold mb-1">PadelPoint Tembalang</h3>
+<p class="text-on-surface-variant text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span> Jl. Prof. Soedarto, Tembalang
+                            </p>
+</div>
+</div>
+<div class="flex gap-4 mb-6">
+<div class="flex flex-col px-3 py-2 bg-white/40 rounded-xl text-center flex-1">
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">COURTS</span>
+<span class="text-lg font-black text-on-surface">4 Units</span>
+</div>
+<div class="flex flex-col px-3 py-2 bg-white/40 rounded-xl text-center flex-1">
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">TYPE</span>
+<span class="text-lg font-black text-on-surface">Indoor</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-xs text-outline font-bold uppercase tracking-wider">START FROM</p>
+<p class="text-xl font-black text-primary">Rp 150k<span class="text-sm font-medium text-on-surface-variant">/hr</span></p>
+</div>
+<button class="w-12 h-12 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center hover:bg-primary hover:text-on-primary transition-colors btn-3d">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Venue Card 2 -->
+<div class="group bg-white/60 backdrop-blur-md rounded-[2rem] overflow-hidden border border-white/40 shadow-sm hover:shadow-2xl transition-all duration-500 tilt-card reveal">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A brightly lit outdoor padel court with high glass walls at dusk, surrounded by palm trees and soft twilight glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABT1NHr5mvWLw_q2A1F3o_hsY67RsOYalruB5SxI-wkrvQpNb2oewafk1gwTarfFCQWTckYRrkXf36dQz2NbXtHDBkNcBNJXgXMj0qzsli14Hg92VAzJU6bgCBO-kYmdnRTyI0ViLlK_LnAtuVYpSXecQ_GOjactiMWRVfk4QnhQxW0YW0diyLZ7TrRPrKUsramkIBN5XcoaslkIrP0MxlJoLZbOyof7mKq_SZaZidTk5D2ilvbEUxcCUajiyE-o6nxjbO1wj9svXH"/>
+<div class="absolute top-4 right-4 glass-panel px-4 py-2 rounded-full flex items-center gap-1 border border-white/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-on-surface font-bold text-sm">4.8</span>
+</div>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-2xl font-bold mb-1">Gajahmungkur Arena</h3>
+<p class="text-on-surface-variant text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span> Jl. Sultan Agung, Semarang
+                            </p>
+</div>
+</div>
+<div class="flex gap-4 mb-6">
+<div class="flex flex-col px-3 py-2 bg-white/40 rounded-xl text-center flex-1">
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">COURTS</span>
+<span class="text-lg font-black text-on-surface">2 Units</span>
+</div>
+<div class="flex flex-col px-3 py-2 bg-white/40 rounded-xl text-center flex-1">
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">TYPE</span>
+<span class="text-lg font-black text-on-surface">Outdoor</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-xs text-outline font-bold uppercase tracking-wider">START FROM</p>
+<p class="text-xl font-black text-primary">Rp 120k<span class="text-sm font-medium text-on-surface-variant">/hr</span></p>
+</div>
+<button class="w-12 h-12 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center hover:bg-primary hover:text-on-primary transition-colors btn-3d">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Venue Card 3 -->
+<div class="group bg-white/60 backdrop-blur-md rounded-[2rem] overflow-hidden border border-white/40 shadow-sm hover:shadow-2xl transition-all duration-500 tilt-card reveal">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Dynamic shot of a padel player hitting a ball with a racket, blurred motion background showing high energy and athletic action" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHphnke1Rj8TxVpEic6zffoku0rI3YXZ1q5QtnyA_UQRRM19lKXFEXWM44-ySBjOlwooDYurwRcSurhb3R53u5bXnhR2BYhYHzeWdC3aaMmB4XAtcP1hCyN7b-I0YQTmfSvmQ2PKnJi8f6ebnPn35ywJ9_3TBMnqmpOe2E9WECwxSwCjOxZ2Ncu9tnKD-c0Db9lkFLYkfyEqZu3RVZrt1-zMWLPIaVXE2qu-utIZDoLIYY56j3VuNwW0Lgt8CsqouffhrpY0Zytmf6"/>
+<div class="absolute top-4 right-4 glass-panel px-4 py-2 rounded-full flex items-center gap-1 border border-white/20">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-on-surface font-bold text-sm">5.0</span>
+</div>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-2xl font-bold mb-1">Simpang Lima Padel</h3>
+<p class="text-on-surface-variant text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span> Area Pusat Kota Semarang
+                            </p>
+</div>
+</div>
+<div class="flex gap-4 mb-6">
+<div class="flex flex-col px-3 py-2 bg-white/40 rounded-xl text-center flex-1">
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">COURTS</span>
+<span class="text-lg font-black text-on-surface">6 Units</span>
+</div>
+<div class="flex flex-col px-3 py-2 bg-white/40 rounded-xl text-center flex-1">
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">TYPE</span>
+<span class="text-lg font-black text-on-surface">Indoor</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-xs text-outline font-bold uppercase tracking-wider">START FROM</p>
+<p class="text-xl font-black text-primary">Rp 180k<span class="text-sm font-medium text-on-surface-variant">/hr</span></p>
+</div>
+<button class="w-12 h-12 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center hover:bg-primary hover:text-on-primary transition-colors btn-3d">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-24">
+<div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+<div class="relative reveal">
+<div class="absolute -top-12 -left-12 w-24 h-24 hero-gradient rounded-full opacity-20 blur-2xl"></div>
+<h2 class="text-5xl font-black text-on-surface leading-tight mb-8">Apa Kata <br/><span class="text-primary-dim">Para Pemain?</span></h2>
+<div class="space-y-6">
+<div class="p-6 glass-panel rounded-2xl shadow-xl shadow-on-surface/5 border border-white/50 relative tilt-card">
+<span class="material-symbols-outlined text-primary-fixed-dim text-6xl absolute top-4 right-6 opacity-40">format_quote</span>
+<p class="text-on-surface-variant italic mb-4 relative z-10">"Sistem bookingnya beneran praktis banget. Gak perlu WA admin lama-lama, tinggal klik langsung dapet court. Favorit banget!"</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant shadow-inner"></div>
+<div>
+<p class="font-bold text-on-surface">Andra Wijaya</p>
+<p class="text-xs text-outline">Regular Player</p>
+</div>
+</div>
+</div>
+<div class="p-6 glass-panel rounded-2xl shadow-xl shadow-on-surface/5 border border-white/50 md:ml-8 relative tilt-card">
+<span class="material-symbols-outlined text-primary-fixed-dim text-6xl absolute top-4 right-6 opacity-40">format_quote</span>
+<p class="text-on-surface-variant italic mb-4 relative z-10">"Tempatnya bersih, court-nya standard internasional. Pas banget buat main bareng temen-temen kantor sore hari."</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant shadow-inner"></div>
+<div>
+<p class="font-bold text-on-surface">Sisca Pratama</p>
+<p class="text-xs text-outline">Community Member</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="relative reveal">
+<img class="rounded-[3rem] w-full aspect-square object-cover shadow-2xl tilt-card" data-alt="A group of diverse friends laughing and cheering after a padel match on a vibrant green court, holding rackets and wearing sports gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjLQYSdBsjiPddMuBVMdKJs6BsTnscxzJ_TwaGhLZJXVBIZCSVDivSgQVD68wYVO6s3JRSs0jyAC7OK1JVhwNrvm-d9yMpL20t09DT8oTJ1McfJa3ZsI92WoXwnoKKCASsA-OwuunjNRswA4JuGCp08RZBmItHuZnzKTBeJsTVEijn2DYd16a9h9hogbORP9d75dIYu5_EK1UsFj7L7YzMtzS0JO7vZ0s2FhCRzpwdw4usYoV3lDf0_dVTCGoAe6v3omLaxZdxRL1F"/>
+<div class="absolute -bottom-8 -right-8 glass-panel p-8 rounded-3xl border border-white/40 shadow-2xl max-w-xs reveal">
+<div class="flex items-center gap-4 mb-4">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-white bg-slate-200"></div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-slate-300"></div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-slate-400"></div>
+</div>
+<span class="text-sm font-bold text-on-surface">+1,200 Players</span>
+</div>
+<p class="text-sm text-on-surface-variant">Join the fastest growing sports community in Semarang.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-white/40 backdrop-blur-xl border-t border-white/20 w-full mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 max-w-7xl mx-auto font-plus-jakarta-sans text-sm">
+<div class="col-span-1 md:col-span-1">
+<span class="text-xl font-black text-slate-900 dark:text-white mb-6 block">PadelPoint Semarang</span>
+<p class="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">Experience the future of Padel in Semarang. Fast bookings, premium courts, and an amazing community.</p>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-white/50 backdrop-blur-sm flex items-center justify-center text-primary-dim hover:bg-primary-fixed transition-colors shadow-sm">
+<span class="material-symbols-outlined">share</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-white/50 backdrop-blur-sm flex items-center justify-center text-primary-dim hover:bg-primary-fixed transition-colors shadow-sm">
+<span class="material-symbols-outlined">mail</span>
+</div>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-6">Product</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 transition-opacity" href="#">Explore Venues</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 transition-opacity" href="#">How it Works</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 transition-opacity" href="#">Pricing</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 transition-opacity" href="#">Partner Registration</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-6">Resources</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 transition-opacity" href="#">Semarang Area</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 transition-opacity" href="#">Contact Us</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 transition-opacity" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:underline decoration-lime-500 underline-offset-4 transition-opacity" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-6">Stay Updated</h4>
+<p class="text-slate-500 dark:text-slate-400 mb-4">Dapatkan info promo dan jadwal terbaru.</p>
+<div class="flex">
+<input class="bg-white/50 backdrop-blur-sm rounded-l-xl border-none focus:ring-0 px-4 w-full text-xs" placeholder="Email" type="text"/>
+<button class="bg-primary px-4 py-3 rounded-r-xl text-primary-fixed btn-3d">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="border-t border-white/20 py-8 px-8">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 dark:text-slate-400 text-xs">
+<p>© 2024 PadelPoint Semarang. The Kinetic Glass Court Experience.</p>
+<div class="flex gap-6">
+<a class="hover:text-lime-500" href="#">Instagram</a>
+<a class="hover:text-lime-500" href="#">TikTok</a>
+<a class="hover:text-lime-500" href="#">Twitter</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- FAB for quick action -->
+<button class="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-primary-fixed text-on-primary-fixed shadow-2xl flex items-center justify-center z-[100] hover:scale-110 active:scale-95 transition-all btn-3d">
+<span class="material-symbols-outlined text-3xl">chat</span>
+</button>
+<script>
+    // Intersection Observer for Reveal on Scroll
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Handle Navbar Scroll State
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 50) {
+            nav.classList.add('bg-white/80', 'shadow-md');
+            nav.classList.remove('bg-white/40');
+        } else {
+            nav.classList.add('bg-white/40');
+            nav.classList.remove('bg-white/80', 'shadow-md');
+        }
+    });
+
+    // Subtle 3D Mouse Movement for Hero Card
+    const heroCard = document.querySelector('.tilt-card');
+    if(heroCard) {
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth < 1024) return;
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            heroCard.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${-x}deg)`;
+        });
+    }
+</script>
+</body></html>

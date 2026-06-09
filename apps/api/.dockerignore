@@ -1,0 +1,16 @@
+*.exe
+*.exe~
+server.exe
+server.exe~
+tmp_test.exe
+test_main.exe
+api-server
+.env
+.env.local
+.git
+.gitignore
+*.md
+docker-compose.yml
+Dockerfile
+.vscode
+.idea
