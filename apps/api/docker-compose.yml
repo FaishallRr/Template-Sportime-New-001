@@ -59,35 +59,13 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    env_file: .env
     environment:
-      - APP_ENV=development
-      - APP_PORT=8080
       - DB_HOST=postgres
       - DB_PORT=5432
-      - DB_USER=padel
-      - DB_PASSWORD=padelpass_secure_2026
-      - DB_NAME=padelpoint
-      - DB_SSLMODE=disable
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - JWT_SECRET=A3500C76797F9F5BB3E1157DA9F6211AB8630F2D412C616FA4B07C68ABDA49EC
-      - JWT_ACCESS_EXPIRY=24h
-      - JWT_REFRESH_EXPIRY=168h
-      - TRIPAY_API_KEY=6OS9Ms0kQua76cIv1M0SCG98ek3wvW7JJtjs0rvC
-      - TRIPAY_PRIVATE_KEY=PGYb7-sinUf-NnIGN-CnCo8-UdUm2
-      - TRIPAY_MERCHANT_CODE=T50731
-      - TRIPAY_IS_PRODUCTION=true
-      - FRONTEND_URL=https://sporttime.my.id
-      - RATE_LIMIT_RPS=10
-      - SLOT_LOCK_MINUTES=10
-      - WITHDRAWAL_FEE_PERCENT=2
-      - FONNTE_TOKEN=guv42TMeTgQKoZTXxoTU
-      - SMTP_HOST=smtp.gmail.com
-      - SMTP_PORT=587
-      - SMTP_USER=jalansukses0507@gmail.com
-      - SMTP_PASSWORD=ufaw cpcw gcyz ukna
-      - EMAIL_FROM_ADDRESS=jalansukses0507@gmail.com
-      - EMAIL_FROM_NAME=SportTime
+      - APP_ENV=production
 
 volumes:
   pgdata:
