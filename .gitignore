@@ -10,3 +10,9 @@ node_modules/
 *.test
 *.out
 .next
+
+# Dev artifacts
+planing.md
+replace-cookie.js
+stitch_padel_semarang_booking_system/
+TESTING_DATA_RELATIONSHIPS.md
