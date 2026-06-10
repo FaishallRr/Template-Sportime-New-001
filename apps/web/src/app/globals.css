@@ -481,6 +481,24 @@ html {
   animation: shimmer-enhanced 1.5s ease-in-out infinite;
 }
 
+/* === Route Loading Bar === */
+.route-loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 9999;
+  background: linear-gradient(90deg, #cafd00, #4e6300, #cafd00);
+  background-size: 200% 100%;
+  animation: route-loading 1.5s ease infinite;
+  pointer-events: none;
+}
+@keyframes route-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 /* === Slow Float === */
 @keyframes float-slow {
   0%, 100% { transform: translateY(0px) rotate(0deg); }

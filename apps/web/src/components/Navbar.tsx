@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 type NavVariant = "full" | "checkout" | "confirmation";
@@ -16,6 +17,7 @@ export default function Navbar({
   activePage = "none",
   variant = "full",
 }: NavbarProps) {
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [user, setUser] = useState<{ full_name: string; role: string } | null>(
     null,
@@ -82,7 +84,7 @@ export default function Navbar({
     document.cookie = "refresh_token=; path=/; max-age=0";
     document.cookie = "user=; path=/; max-age=0";
     setUser(null);
-    window.location.href = "/login";
+    router.push("/login");
   };
 
   /* ── Confirmation Navbar ── */

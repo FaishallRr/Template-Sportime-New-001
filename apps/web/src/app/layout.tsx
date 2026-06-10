@@ -67,6 +67,7 @@ export const metadata: Metadata = {
 import { Toaster } from "react-hot-toast";
 import FloatingActionButton from "@/components/FloatingActionButton";
 import PageTransitionWrapper from "@/components/PageTransitionWrapper";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function RootLayout({
   children,
@@ -89,6 +90,7 @@ export default function RootLayout({
         >
           Langsung ke konten utama
         </a>
+        <ScrollToTop />
         <div id="main-content">
           <PageTransitionWrapper>{children}</PageTransitionWrapper>
         </div>
