@@ -421,40 +421,18 @@ export default function ExploreContent() {
       </p>
     </div>
   ) : (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={{
-        hidden: {},
-        visible: { transition: { staggerChildren: 0.08 } },
-      }}
-      className="space-y-4"
-    >
+    <div className="space-y-4 venue-list-stagger">
       {filteredVenues.map((venue, index) => (
-        <motion.div
-          key={venue.id}
-          variants={{
-            hidden: { opacity: 0, y: 24 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: {
-                type: "spring" as const,
-                stiffness: 200,
-                damping: 20,
-              },
-            },
-          }}
-        >
+        <div key={venue.id}>
           <VenueCard
             venue={venue}
             index={index}
             isSelected={selectedVenueId === venue.id}
             onSelect={() => setSelectedVenueId(venue.id)}
           />
-        </motion.div>
+        </div>
       ))}
-    </motion.div>
+    </div>
   );
 
   return (
@@ -505,7 +483,7 @@ export default function ExploreContent() {
       <div
         ref={sheetRef}
         className={`md:hidden fixed bottom-0 left-0 right-0 z-30
-                     bg-surface/95 backdrop-blur-xl rounded-t-3xl shadow-2xl
+                     bg-surface/95 rounded-t-3xl shadow-2xl
                      flex flex-col overflow-hidden
                      transition-transform duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]`}
         style={{
@@ -513,15 +491,16 @@ export default function ExploreContent() {
           transform: sheetExpanded
             ? "translateY(0)"
             : "translateY(calc(70vh - 165px))",
+          willChange: "transform",
         }}
       >
-        {/* Drag Handle */}
+        {/* Drag Handle — touch target besar, full width */}
         <div
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
-          className="flex-shrink-0 flex justify-center pt-3 pb-1 cursor-grab active:cursor-grabbing touch-none select-none"
+          className="flex-shrink-0 cursor-grab active:cursor-grabbing touch-none select-none relative z-20"
           role="button"
           tabIndex={0}
           aria-label={
@@ -531,8 +510,11 @@ export default function ExploreContent() {
             if (e.key === "Enter" || e.key === " ")
               setSheetExpanded(!sheetExpanded);
           }}
+          style={{ padding: "12px 0 80px 0", marginBottom: "-68px" }}
         >
-          <div className="w-10 h-1.5 bg-outline/30 rounded-full hover:bg-outline/50 transition-colors" />
+          <div className="flex justify-center">
+            <div className="w-12 h-1.5 bg-outline/30 rounded-full hover:bg-outline/50 transition-colors" />
+          </div>
         </div>
 
         {/* Filter Section (always visible) */}

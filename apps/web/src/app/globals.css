@@ -89,6 +89,7 @@
 
 /* === 3D Tilt Effect === */
 .tilt-card {
+  will-change: transform;
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   transform-style: preserve-3d;
 }
@@ -116,7 +117,9 @@
 
 /* === 3D Button Press === */
 .btn-3d {
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: transform;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 4px 0 0 rgba(78, 99, 0, 0.3);
 }
 .btn-3d:active {
@@ -156,6 +159,9 @@
 
 /* === Venue Card 3D (Explore Page) === */
 .venue-card-3d {
+  will-change: transform;
+  content-visibility: auto;
+  contain-intrinsic-size: 400px;
   transition:
     transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     box-shadow 0.4s ease;
@@ -176,6 +182,7 @@
 
 /* === Kinetic Bubble Background (Explore) === */
 .kinetic-bubble {
+  will-change: transform;
   position: absolute;
   border-radius: 50%;
   background: linear-gradient(
@@ -250,6 +257,7 @@
 
 /* === 3D Booking Summary Card (Venue Detail) === */
 .summary-3d {
+  will-change: transform;
   box-shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05),
@@ -424,6 +432,42 @@ html {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradient-shift 4s ease infinite;
+}
+
+/* === Venue List Stagger Animation (GPU) === */
+.venue-list-stagger > * {
+  animation: venue-card-enter 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+.venue-list-stagger > *:nth-child(1) { animation-delay: 0s; }
+.venue-list-stagger > *:nth-child(2) { animation-delay: 0.06s; }
+.venue-list-stagger > *:nth-child(3) { animation-delay: 0.12s; }
+.venue-list-stagger > *:nth-child(4) { animation-delay: 0.18s; }
+.venue-list-stagger > *:nth-child(5) { animation-delay: 0.24s; }
+.venue-list-stagger > *:nth-child(6) { animation-delay: 0.3s; }
+.venue-list-stagger > *:nth-child(7) { animation-delay: 0.36s; }
+.venue-list-stagger > *:nth-child(8) { animation-delay: 0.42s; }
+.venue-list-stagger > *:nth-child(9) { animation-delay: 0.48s; }
+.venue-list-stagger > *:nth-child(10) { animation-delay: 0.54s; }
+
+@keyframes venue-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Mobile: kurangi backdrop blur biar ringan === */
+@media (max-width: 768px) {
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
 }
 
 /* === Enhanced Skeleton Shimmer === */
