@@ -299,7 +299,7 @@ export default function VenueMap({
                 font-weight: 700; font-size: 14px; cursor: pointer; min-height: 44px;
                 letter-spacing: 0.3px;
               ">
-              Lihat Detail →
+              Lihat Detail <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">arrow_forward</span>
             </button>
             <button onclick="window.__onRouteClick && window.__onRouteClick(${venue.latitude}, ${venue.longitude}, '${safeName}')" 
               style="
@@ -308,7 +308,7 @@ export default function VenueMap({
                 font-weight: 700; font-size: 14px; cursor: pointer; min-height: 44px;
                 letter-spacing: 0.3px;
               ">
-              🗺️ Rute
+              <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">map</span> Rute
             </button>
           </div>
         </div>
@@ -493,6 +493,19 @@ export default function VenueMap({
         @keyframes route-panel-in {
           from { opacity: 0; transform: translateY(-8px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+        .leaflet-popup-close-button {
+          position: absolute !important; top: 8px !important; right: 8px !important;
+          width: 32px !important; height: 32px !important; border-radius: 50% !important;
+          background: rgba(0,0,0,0.06) !important; font-size: 22px !important;
+          display: flex !important; align-items: center !important;
+          justify-content: center !important; cursor: pointer !important;
+          transition: all 0.2s !important; line-height: 1 !important;
+          border: none !important; color: #666 !important;
+        }
+        .leaflet-popup-close-button:hover {
+          background: rgba(0,0,0,0.12) !important;
+          transform: scale(1.1) !important; color: #222 !important;
         }
       `}</style>
     </div>
