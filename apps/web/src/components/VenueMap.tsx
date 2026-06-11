@@ -34,11 +34,11 @@ interface VenueMapProps {
 }
 
 const PRESET_LOCATIONS = [
-  { name: "Tembalang", lat: -7.0548, lng: 110.4403 },
   { name: "Simpang Lima", lat: -6.9883, lng: 110.4229 },
-  { name: "Pandelan", lat: -7.0039, lng: 110.4095 },
-  { name: "Gombel", lat: -7.0361, lng: 110.4197 },
-  { name: "Ngaliyan", lat: -6.9838, lng: 110.3459 },
+  { name: "Tugu Muda", lat: -6.9999, lng: 110.4274 },
+  { name: "Kota Lama", lat: -6.9686, lng: 110.4274 },
+  { name: "Undip Tembalang", lat: -7.0548, lng: 110.4403 },
+  { name: "BSB Mijen", lat: -7.0200, lng: 110.3300 },
 ];
 
 export default function VenueMap({

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, memo, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import DemoPopup from "@/components/DemoPopup";
 
 type NavVariant = "full" | "checkout" | "confirmation";
 type ActivePage = "explore" | "bookings" | "profile" | "none";
@@ -260,7 +259,6 @@ const Navbar = memo(function Navbar({
           </motion.div>
         )}
       </AnimatePresence>
-      <DemoPopup />
     </nav>
   );
 });
