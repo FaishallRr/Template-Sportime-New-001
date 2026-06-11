@@ -270,45 +270,45 @@ export default function VenueMap({
 
     venues.forEach((venue) => {
       const distanceText = venue.distance_km
-        ? `<div style="font-size: 11px; color: #666; margin-top: 4px;">📍 ${venue.distance_km} km dari Anda</div>`
+        ? `<div style="font-size:12px;color:#666;margin-top:6px;display:flex;align-items:center;gap:4px;"><span class="material-symbols-outlined" style="font-size:14px;color:#1b5e20;">near_me</span> ${venue.distance_km} km dari Anda</div>`
         : "";
 
       const safeName = venue.name.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
 
       const popup = L.popup({
         className: "venue-popup",
-        maxWidth: 300,
+        maxWidth: 320,
         closeButton: true,
       }).setContent(`
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; padding: 6px;">
-          <h3 style="font-size: 16px; font-weight: 800; margin: 0 0 6px 0; color: #1a1a1a; line-height: 1.3;">${venue.name}</h3>
-          <p style="font-size: 13px; color: #555; margin: 0 0 8px 0; line-height: 1.4;">${venue.address}</p>
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-            <span style="background: #f0fdf4; color: #166534; padding: 3px 10px; border-radius: 14px; font-size: 13px; font-weight: 700; letter-spacing: 0.3px;">
-              ⭐ ${venue.rating}
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;padding:10px 6px 4px">
+          <h3 style="font-size:17px;font-weight:800;margin:0 0 4px 0;color:#1a1a1a;line-height:1.35;padding-right:20px">${venue.name}</h3>
+          <p style="font-size:13px;color:#666;margin:0 0 10px 0;line-height:1.4;display:flex;align-items:center;gap:4px"><span class="material-symbols-outlined" style="font-size:14px;color:#999">location_on</span>${venue.address}</p>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="background:#f0fdf4;color:#166534;padding:2px 10px 2px 6px;border-radius:14px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:3px">
+              <span class="material-symbols-outlined" style="font-size:14px;font-variation-settings:'FILL' 1">star</span> ${venue.rating}
             </span>
-            ${venue.price ? `<span style="font-size: 13px; font-weight: 700; color: #1b5e20;">${venue.price}</span>` : ""}
+            ${venue.price ? `<span style="font-size:14px;font-weight:800;color:#1b5e20">${venue.price}</span>` : ""}
           </div>
           ${distanceText}
-          <div style="display: flex; gap: 8px; margin-top: 12px;">
+          <div style="display:flex;gap:8px;margin-top:12px">
             <button onclick="window.__onVenueClick && window.__onVenueClick('${venue.id}')" 
               style="
-                flex: 1; padding: 12px 16px;
-                background: linear-gradient(135deg, #1b5e20, #2e7d32);
-                color: white; border: none; border-radius: 12px;
-                font-weight: 700; font-size: 14px; cursor: pointer; min-height: 44px;
-                letter-spacing: 0.3px;
+                flex:1;padding:14px 16px;
+                background:linear-gradient(135deg,#1b5e20,#2e7d32);
+                color:white;border:none;border-radius:14px;
+                font-weight:700;font-size:14px;cursor:pointer;min-height:48px;
+                letter-spacing:0.2px;
               ">
-              Lihat Detail <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">arrow_forward</span>
+              Lihat Detail <span class="material-symbols-outlined" style="font-size:15px;vertical-align:middle">arrow_forward</span>
             </button>
             <button onclick="window.__onRouteClick && window.__onRouteClick(${venue.latitude}, ${venue.longitude}, '${safeName}')" 
               style="
-                flex-shrink: 0; padding: 12px 14px;
-                background: #4285f4; color: white; border: none; border-radius: 12px;
-                font-weight: 700; font-size: 14px; cursor: pointer; min-height: 44px;
-                letter-spacing: 0.3px;
+                flex-shrink:0;padding:14px 16px;
+                background:#4285f4;color:white;border:none;border-radius:14px;
+                font-weight:700;font-size:14px;cursor:pointer;min-height:48px;
+                letter-spacing:0.2px;display:inline-flex;align-items:center;gap:4px;
               ">
-              <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle;">map</span> Rute
+              <span class="material-symbols-outlined" style="font-size:16px">map</span> Rute
             </button>
           </div>
         </div>
@@ -495,17 +495,17 @@ export default function VenueMap({
           to { opacity: 1; transform: translateY(0); }
         }
         .leaflet-popup-close-button {
-          position: absolute !important; top: 8px !important; right: 8px !important;
-          width: 32px !important; height: 32px !important; border-radius: 50% !important;
-          background: rgba(0,0,0,0.06) !important; font-size: 22px !important;
+          position: absolute !important; top: 10px !important; right: 10px !important;
+          width: 28px !important; height: 28px !important; border-radius: 50% !important;
+          background: rgba(0,0,0,0.04) !important; font-size: 18px !important;
           display: flex !important; align-items: center !important;
           justify-content: center !important; cursor: pointer !important;
           transition: all 0.2s !important; line-height: 1 !important;
-          border: none !important; color: #666 !important;
+          border: none !important; color: #999 !important; z-index: 2 !important;
         }
         .leaflet-popup-close-button:hover {
-          background: rgba(0,0,0,0.12) !important;
-          transform: scale(1.1) !important; color: #222 !important;
+          background: rgba(0,0,0,0.1) !important;
+          transform: scale(1.15) !important; color: #333 !important;
         }
       `}</style>
     </div>
