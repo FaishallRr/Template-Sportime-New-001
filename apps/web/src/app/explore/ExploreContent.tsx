@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LazyImage from "@/components/LazyImage";
 
 const VenueMap = dynamic(() => import("@/components/VenueMap"), {
   ssr: false,
@@ -102,10 +103,8 @@ function VenueCard({
       }`}
     >
       <div className="relative h-44 overflow-hidden venue-card-img">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <LazyImage
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-          loading="lazy"
           alt={venue.name}
           src={imageUrl}
         />
@@ -183,7 +182,9 @@ export default function ExploreContent() {
   const [useLocation, setUseLocation] = useState(false);
   const [sportFilter, setSportFilter] = useState("");
   const [sheetExpanded, setSheetExpanded] = useState(false);
-  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(
+    null,
+  );
   const sheetRef = useRef<HTMLDivElement>(null);
   const sheetExpandedRef = useRef(false);
   const dragRef = useRef({

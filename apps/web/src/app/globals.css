@@ -408,7 +408,6 @@
 
 /* === Venue Card Image Container === */
 .venue-card-img {
-  aspect-ratio: 4 / 3;
   background: var(--color-surface-container-low);
 }
 

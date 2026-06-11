@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LazyImage from "@/components/LazyImage";
 
 const SPORT_LABELS: Record<string, { label: string; icon: string }> = {
   padel: { label: "Padel", icon: "sports_tennis" },
@@ -192,7 +193,6 @@ export default function VenueDetailContent() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIdx, setLightboxIdx] = useState(0);
-  const [imgLoaded, setImgLoaded] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     fetch(`/api/venues/${venueSlug}`)
@@ -342,13 +342,10 @@ export default function VenueDetailContent() {
             className="md:col-span-2 md:row-span-2 relative overflow-hidden rounded-2xl group shadow-lg cursor-pointer"
             onClick={() => openLightbox(0)}
           >
-            {!imgLoaded[0] && <SkeletonBlock className="absolute inset-0" />}
-            <img
-              className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${imgLoaded[0] ? "opacity-100" : "opacity-0"}`}
+            <LazyImage
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               alt={venue.name}
               src={images[0]}
-              loading="lazy"
-              onLoad={() => setImgLoaded((p) => ({ ...p, [0]: true }))}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
               <span className="text-white font-semibold tracking-tight flex items-center gap-2">
@@ -365,13 +362,10 @@ export default function VenueDetailContent() {
                 className="relative overflow-hidden rounded-2xl group shadow-lg hidden md:block cursor-pointer"
                 onClick={() => openLightbox(i)}
               >
-                {!imgLoaded[i] && <SkeletonBlock className="absolute inset-0" />}
-                <img
-                  className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${imgLoaded[i] ? "opacity-100" : "opacity-0"}`}
+                <LazyImage
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   alt={venue.name}
                   src={images[i]}
-                  loading="lazy"
-                  onLoad={() => setImgLoaded((p) => ({ ...p, [i]: true }))}
                 />
               </motion.div>
             ) : !images[1] ? null : (

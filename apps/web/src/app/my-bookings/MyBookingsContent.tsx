@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingActionButton from "@/components/FloatingActionButton";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import LazyImage from "@/components/LazyImage";
 
 /* ─── Animated Counter Hook ─── */
 function useCountUp(target: number, enabled: boolean, duration = 2000) {
@@ -200,10 +201,8 @@ function BookingCard({ booking }: { booking: Booking }) {
       <div className="relative z-10 flex flex-col md:flex-row">
         {/* Venue Image */}
         <div className="relative w-full md:w-56 h-48 md:h-auto overflow-hidden shrink-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <LazyImage
             className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-[800ms] ease-out"
-            loading="lazy"
             alt={booking.venueName}
             src={booking.image}
           />

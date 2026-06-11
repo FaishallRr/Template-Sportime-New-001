@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import LazyImage from "@/components/LazyImage";
 
 interface Venue {
   id: string;
@@ -67,10 +68,8 @@ function VenueCard({ venue, index }: { venue: Venue; index: number }) {
         className="group bg-white/60 backdrop-blur-md rounded-[2rem] overflow-hidden border border-white/40 shadow-sm hover:shadow-2xl transition-all duration-500 tilt-card h-full block cursor-pointer"
       >
         <div className="relative h-64 overflow-hidden bg-surface-container-low venue-card-img">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <LazyImage
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            loading="lazy"
             alt={venue.name}
             src={(venue.image_urls && venue.image_urls.length > 0) ? venue.image_urls[0] : "https://lh3.googleusercontent.com/aida-public/AB6AXuBrjBmuqUbFEIHf-tWIuAQLGY56Dcvog6Lh8uOcP_mWrY6lPPjiqQhj1IO0_k6HeqbfPoPwFNUZ_fty_U2nkZniGxLRCqydsWp5LRzcphY-UVBa-0X-hHgFo7AP2UScb4Kd5lwL-Qi5OTakTwWvFP4bVavayVMizrKztSJr8h-4SoVi2AmqZVeJl4TaTYHEtmM6RclVA33McQWudFEY6S2LoiNzKASu71Lsv3zGL6e8ut2WB6ICCnOcGvarc2Ky-evQWp8K9RBfZoHY"}
           />

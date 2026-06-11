@@ -34,10 +34,10 @@ interface VenueMapProps {
 }
 
 const PRESET_LOCATIONS = [
-  { name: "Simpang Lima", lat: -6.9883, lng: 110.4229 },
-  { name: "Tugu Muda", lat: -6.9999, lng: 110.4274 },
-  { name: "Kota Lama", lat: -6.9686, lng: 110.4274 },
-  { name: "Undip Tembalang", lat: -7.0548, lng: 110.4403 },
+  { name: "Simpang Lima", lat: -6.9893, lng: 110.4236 },
+  { name: "Tugu Muda", lat: -6.9843, lng: 110.4093 },
+  { name: "Kota Lama", lat: -6.9680, lng: 110.4279 },
+  { name: "Undip Tembalang", lat: -7.0490, lng: 110.4380 },
   { name: "BSB Mijen", lat: -7.0200, lng: 110.3300 },
 ];
 
@@ -53,10 +53,25 @@ export default function VenueMap({
   const mapInstanceRef = useRef<L.Map | null>(null);
   const routeLayerRef = useRef<L.LayerGroup | null>(null);
   const drawRouteRef = useRef<(lat: number, lng: number, name: string) => void>(() => {});
+  const userMarkerRef = useRef<L.Marker | null>(null);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [routeInfo, setRouteInfo] = useState<RouteInfo | null>(null);
   const [showLocationModal, setShowLocationModal] = useState(false);
   const [pendingRoute, setPendingRoute] = useState<{ lat: number; lng: number; name: string } | null>(null);
+
+  const drawUserMarker = (lat: number, lng: number, map: L.Map, showPopup = false) => {
+    if (userMarkerRef.current) map.removeLayer(userMarkerRef.current);
+    const userIcon = L.divIcon({
+      className: "user-location-marker",
+      html: '<div style="width:20px;height:20px;border-radius:50%;background:#4285f4;border:3px solid white;box-shadow:0 0 0 8px rgba(66,133,244,0.2),0 2px 8px rgba(0,0,0,0.3)"></div>',
+      iconSize: [20, 20],
+      iconAnchor: [10, 10],
+    });
+    const marker = L.marker([lat, lng], { icon: userIcon }).addTo(map);
+    (marker as unknown as { _isUserMarker: boolean })._isUserMarker = true;
+    if (showPopup) marker.bindPopup("📍 Lokasi Anda").openPopup();
+    userMarkerRef.current = marker;
+  };
 
   const clearRoute = () => {
     if (routeLayerRef.current) {
@@ -72,8 +87,13 @@ export default function VenueMap({
     setShowLocationModal(false);
     toast.success(`Lokasi: ${loc.name}`);
 
+    const map = mapInstanceRef.current;
+    if (map) {
+      map.setView([loc.lat, loc.lng], 14);
+      drawUserMarker(loc.lat, loc.lng, map, true);
+    }
+
     if (pendingRoute) {
-      const map = mapInstanceRef.current;
       if (map) {
         fetchRoute(loc.lat, loc.lng, pendingRoute.lat, pendingRoute.lng, pendingRoute.name, map);
       }
@@ -335,14 +355,7 @@ export default function VenueMap({
       const map = mapInstanceRef.current;
       if (map) {
         map.setView(externalUserLocation, 12);
-        const userIcon = L.divIcon({
-          className: "user-location-marker",
-          html: '<div style="width:20px;height:20px;border-radius:50%;background:#4285f4;border:3px solid white;box-shadow:0 0 0 8px rgba(66,133,244,0.2),0 2px 8px rgba(0,0,0,0.3)"></div>',
-          iconSize: [20, 20],
-          iconAnchor: [10, 10],
-        });
-        const userMarker = L.marker(externalUserLocation, { icon: userIcon }).addTo(map);
-        (userMarker as unknown as { _isUserMarker: boolean })._isUserMarker = true;
+        drawUserMarker(externalUserLocation[0], externalUserLocation[1], map);
       }
     }
   }, [externalUserLocation]);
@@ -361,29 +374,7 @@ export default function VenueMap({
         const map = mapInstanceRef.current;
         if (map) {
           map.setView([latitude, longitude], 14);
-
-          const userIcon = L.divIcon({
-            className: "user-location-marker",
-            html: `
-              <div style="
-                width: 20px; height: 20px; border-radius: 50%;
-                background: #4285f4; border: 3px solid white;
-                box-shadow: 0 0 0 8px rgba(66,133,244,0.2), 0 2px 8px rgba(0,0,0,0.3);
-              "></div>
-            `,
-            iconSize: [20, 20],
-            iconAnchor: [10, 10],
-          });
-
-          map.eachLayer((layer) => {
-            if (layer instanceof L.Marker && (layer as unknown as { _isUserMarker?: boolean })._isUserMarker) {
-              map.removeLayer(layer);
-            }
-          });
-
-          const userMarker = L.marker([latitude, longitude], { icon: userIcon }).addTo(map);
-          (userMarker as unknown as { _isUserMarker: boolean })._isUserMarker = true;
-          userMarker.bindPopup("📍 Lokasi Anda").openPopup();
+          drawUserMarker(latitude, longitude, map, true);
         }
       },
       () => {
