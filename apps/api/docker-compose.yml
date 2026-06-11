@@ -31,6 +31,7 @@ services:
       - ./migrations/017_reseed.sql:/docker-entrypoint-initdb.d/017_reseed.sql
       - ./migrations/018_fix_images.sql:/docker-entrypoint-initdb.d/018_fix_images.sql
       - ./migrations/019_seed_reviews.sql:/docker-entrypoint-initdb.d/019_seed_reviews.sql
+      - ./migrations/020_perf_list_index.sql:/docker-entrypoint-initdb.d/020_perf_list_index.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U padel -d padelpoint"]
       interval: 10s

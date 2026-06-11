@@ -88,6 +88,7 @@ export default function Testimonials() {
                   <img
                     src={t.image}
                     alt={t.name}
+                    loading="lazy"
                     className="w-10 h-10 rounded-full object-cover shadow-inner"
                   />
                   <div>
@@ -111,6 +112,7 @@ export default function Testimonials() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="rounded-[3rem] w-full aspect-square object-cover shadow-2xl tilt-card"
+            loading="lazy"
             alt="Sekelompok teman tertawa dan bersorak setelah pertandingan olahraga"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjLQYSdBsjiPddMuBVMdKJs6BsTnscxzJ_TwaGhLZJXVBIZCSVDivSgQVD68wYVO6s3JRSs0jyAC7OK1JVhwNrvm-d9yMpL20t09DT8oTJ1McfJa3ZsI92WoXwnoKKCASsA-OwuunjNRswA4JuGCp08RZBmItHuZnzKTBeJsTVEijn2DYd16a9h9hogbORP9d75dIYu5_EK1UsFj7L7YzMtzS0JO7vZ0s2FhCRzpwdw4usYoV3lDf0_dVTCGoAe6v3omLaxZdxRL1F"
           />
@@ -120,16 +122,19 @@ export default function Testimonials() {
                 <img
                   src="https://randomuser.me/api/portraits/men/15.jpg"
                   alt="Rendra Kusuma"
+                  loading="lazy"
                   className="w-10 h-10 rounded-full border-2 border-white object-cover"
                 />
                 <img
                   src="https://randomuser.me/api/portraits/men/22.jpg"
                   alt="Budi Nusanto"
+                  loading="lazy"
                   className="w-10 h-10 rounded-full border-2 border-white object-cover"
                 />
                 <img
                   src="https://randomuser.me/api/portraits/women/58.jpg"
                   alt="Dewi Wulandari"
+                  loading="lazy"
                   className="w-10 h-10 rounded-full border-2 border-white object-cover"
                 />
               </div>

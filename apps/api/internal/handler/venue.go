@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/lib/pq"
@@ -25,6 +26,21 @@ const venueColumns = `id, name, COALESCE(slug, ''), address, latitude, longitude
 	facilities, image_urls, status, sport_type, rating_avg, review_count,
 	created_at, updated_at`
 
+type venueCacheEntry struct {
+	data      []model.Venue
+	total     int
+	expiresAt time.Time
+}
+
+var (
+	venueCache   sync.Map
+	cacheTTL     = 10 * time.Second
+)
+
+func getCacheKey(status, sport string) string {
+	return status + "|" + sport
+}
+
 func (h *VenueHandler) List(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	q := r.URL.Query()
@@ -36,6 +52,16 @@ func (h *VenueHandler) List(w http.ResponseWriter, r *http.Request) {
 	if status == "" {
 		status = "active"
 	}
+
+	page, _ := strconv.Atoi(q.Get("page"))
+	if page < 1 {
+		page = 1
+	}
+	limit, _ := strconv.Atoi(q.Get("limit"))
+	if limit < 1 || limit > 100 {
+		limit = 50
+	}
+	offset := (page - 1) * limit
 
 	var lat, lng float64
 	var err error
@@ -52,27 +78,66 @@ func (h *VenueHandler) List(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	cacheKey := getCacheKey(status, sport)
+	var venues []model.Venue
+	var total int
+
+	// Try cache (only when no location filter)
+	if lat == 0 && lng == 0 {
+		if entry, ok := venueCache.Load(cacheKey); ok {
+			cached := entry.(*venueCacheEntry)
+			if time.Now().Before(cached.expiresAt) {
+				// Apply pagination on cached data
+				if offset < len(cached.data) {
+					end := offset + limit
+					if end > len(cached.data) {
+						end = len(cached.data)
+					}
+					venues = cached.data[offset:end]
+				} else {
+					venues = []model.Venue{}
+				}
+				total = cached.total
+				writeJSON(w, http.StatusOK, model.APIResponse{
+					Success: true,
+					Data:    venues,
+					Total:   total,
+					Page:    page,
+					PerPage: limit,
+				})
+				return
+			}
+		}
+	}
+
 	var rows *sql.Rows
 	if sport != "" {
 		rows, err = h.db.QueryContext(ctx, fmt.Sprintf(`
 			SELECT %s FROM venues
 			WHERE status = $1 AND sport_type = $2
 			ORDER BY created_at DESC
-		`, venueColumns), status, sport)
+			LIMIT $3 OFFSET $4
+		`, venueColumns), status, sport, limit, offset)
+		if err != nil {
+			writeJSON(w, http.StatusInternalServerError, model.APIResponse{Success: false, Error: "Gagal mengambil data venue"})
+			return
+		}
+		h.db.QueryRowContext(ctx, `SELECT COUNT(*) FROM venues WHERE status = $1 AND sport_type = $2`, status, sport).Scan(&total)
 	} else {
 		rows, err = h.db.QueryContext(ctx, fmt.Sprintf(`
 			SELECT %s FROM venues
 			WHERE status = $1
 			ORDER BY created_at DESC
-		`, venueColumns), status)
-	}
-	if err != nil {
-		writeJSON(w, http.StatusInternalServerError, model.APIResponse{Success: false, Error: "Gagal mengambil data venue"})
-		return
+			LIMIT $2 OFFSET $3
+		`, venueColumns), status, limit, offset)
+		if err != nil {
+			writeJSON(w, http.StatusInternalServerError, model.APIResponse{Success: false, Error: "Gagal mengambil data venue"})
+			return
+		}
+		h.db.QueryRowContext(ctx, `SELECT COUNT(*) FROM venues WHERE status = $1`, status).Scan(&total)
 	}
 	defer rows.Close()
 
-	var venues []model.Venue
 	for rows.Next() {
 		var v model.Venue
 		var facilities pq.StringArray
@@ -93,9 +158,46 @@ func (h *VenueHandler) List(w http.ResponseWriter, r *http.Request) {
 			dist := haversine(lat, lng, venues[i].Latitude, venues[i].Longitude)
 			venues[i].Distance = &dist
 		}
+		// Don't cache location-based queries
+		writeJSON(w, http.StatusOK, model.APIResponse{Success: true, Data: venues, Total: total, Page: page, PerPage: limit})
+		return
 	}
 
-	writeJSON(w, http.StatusOK, model.APIResponse{Success: true, Data: venues})
+	// Update cache (fetch full list for caching)
+	go func() {
+		cacheRows, err := h.db.Query(fmt.Sprintf(`
+			SELECT %s FROM venues
+			WHERE status = $1 AND ($2 = '' OR sport_type = $2)
+			ORDER BY created_at DESC
+		`, venueColumns), status, sport)
+		if err != nil {
+			return
+		}
+		defer cacheRows.Close()
+
+		var allVenues []model.Venue
+		for cacheRows.Next() {
+			var v model.Venue
+			var facilities pq.StringArray
+			var imageURLs pq.StringArray
+			if err := cacheRows.Scan(&v.ID, &v.Name, &v.Slug, &v.Address,
+				&v.Latitude, &v.Longitude, &v.Description, &facilities, &imageURLs,
+				&v.Status, &v.SportType, &v.RatingAvg, &v.ReviewCount,
+				&v.CreatedAt, &v.UpdatedAt); err != nil {
+				continue
+			}
+			v.Facilities = []string(facilities)
+			v.ImageURLs = []string(imageURLs)
+			allVenues = append(allVenues, v)
+		}
+		venueCache.Store(cacheKey, &venueCacheEntry{
+			data:      allVenues,
+			total:     total,
+			expiresAt: time.Now().Add(cacheTTL),
+		})
+	}()
+
+	writeJSON(w, http.StatusOK, model.APIResponse{Success: true, Data: venues, Total: total, Page: page, PerPage: limit})
 }
 
 func (h *VenueHandler) Get(w http.ResponseWriter, r *http.Request) {

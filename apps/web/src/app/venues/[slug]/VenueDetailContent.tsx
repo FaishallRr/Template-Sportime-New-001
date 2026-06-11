@@ -347,6 +347,7 @@ export default function VenueDetailContent() {
               className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${imgLoaded[0] ? "opacity-100" : "opacity-0"}`}
               alt={venue.name}
               src={images[0]}
+              loading="lazy"
               onLoad={() => setImgLoaded((p) => ({ ...p, [0]: true }))}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -369,6 +370,7 @@ export default function VenueDetailContent() {
                   className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${imgLoaded[i] ? "opacity-100" : "opacity-0"}`}
                   alt={venue.name}
                   src={images[i]}
+                  loading="lazy"
                   onLoad={() => setImgLoaded((p) => ({ ...p, [i]: true }))}
                 />
               </motion.div>
@@ -443,12 +445,14 @@ export default function VenueDetailContent() {
                 {amenities.map((a: { icon: string; label: string }, i: number) => (
                   <motion.div
                     key={i}
-                    whileHover={{ scale: 1.08, y: -3 }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    style={{ willChange: "transform" }}
                     className="flex items-center gap-2 px-4 py-2 bg-surface-container-low rounded-full border border-slate-200 shadow-sm cursor-default"
                   >
                     <motion.span
-                      whileHover={{ rotate: 15 }}
+                      whileHover={{ rotate: 10 }}
+                    style={{ willChange: "transform" }}
                       className="material-symbols-outlined text-primary text-lg"
                     >
                       {a.icon}
@@ -470,9 +474,10 @@ export default function VenueDetailContent() {
                 {dates.map((d, i) => (
                   <motion.button
                     key={i}
-                    whileHover={{ scale: 1.05, y: -3 }}
+                    whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedDateIdx(i)}
+                    style={{ willChange: "transform" }}
                     className={`relative min-w-[80px] p-4 rounded-2xl text-center cursor-pointer transition-colors snap-start shadow-sm border ${
                       selectedDateIdx === i
                         ? "bg-primary text-on-primary border-primary"
@@ -483,7 +488,7 @@ export default function VenueDetailContent() {
                       <motion.div
                         layoutId="date-bg"
                         className="absolute inset-0 bg-primary rounded-2xl"
-                        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 30 }}
                       />
                     )}
                     <div className={`relative z-10 text-[10px] font-bold uppercase tracking-widest ${selectedDateIdx === i ? "opacity-90" : "opacity-50"}`}>{d.month}</div>
@@ -557,8 +562,8 @@ export default function VenueDetailContent() {
                           return (
                             <motion.div
                               key={slot.id}
-                              layout
                               variants={slotVariants}
+                              style={{ willChange: "transform" }}
                               custom={idx}
                               whileHover="hover"
                               whileTap="tap"
@@ -590,7 +595,7 @@ export default function VenueDetailContent() {
                                 <motion.div
                                   initial={{ scale: 0 }}
                                   animate={{ scale: 1 }}
-                                  transition={{ type: "spring", stiffness: 300 }}
+                                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
                                   className="absolute -top-1 -right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center shadow"
                                 >
                                   <span className="material-symbols-outlined text-primary text-[12px]" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>

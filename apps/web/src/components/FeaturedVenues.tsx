@@ -58,7 +58,8 @@ function VenueCard({ venue, index }: { venue: Venue; index: number }) {
       viewport={{ once: true, amount: 0.2 }}
       whileHover={{ y: -8 }}
       whileTap={{ scale: 0.98 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      transition={{ type: "spring", stiffness: 200, damping: 25 }}
+      style={{ willChange: "transform" }}
     >
       <Link
         href={`/venues/${venue.slug}`}
@@ -69,6 +70,7 @@ function VenueCard({ venue, index }: { venue: Venue; index: number }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            loading="lazy"
             alt={venue.name}
             src={(venue.image_urls && venue.image_urls.length > 0) ? venue.image_urls[0] : "https://lh3.googleusercontent.com/aida-public/AB6AXuBrjBmuqUbFEIHf-tWIuAQLGY56Dcvog6Lh8uOcP_mWrY6lPPjiqQhj1IO0_k6HeqbfPoPwFNUZ_fty_U2nkZniGxLRCqydsWp5LRzcphY-UVBa-0X-hHgFo7AP2UScb4Kd5lwL-Qi5OTakTwWvFP4bVavayVMizrKztSJr8h-4SoVi2AmqZVeJl4TaTYHEtmM6RclVA33McQWudFEY6S2LoiNzKASu71Lsv3zGL6e8ut2WB6ICCnOcGvarc2Ky-evQWp8K9RBfZoHY"}
           />

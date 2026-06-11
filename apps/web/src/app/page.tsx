@@ -204,12 +204,12 @@ export default function Home() {
       <RoleRedirector />
       <Navbar />
       <main>
-        <HeroSection />
-        <TrustBadges />
-        <HowItWorks />
-        <FeaturedVenues />
-        <SeoContent />
-        <Testimonials />
+        <div className="content-visibility-section"><HeroSection /></div>
+        <div className="content-visibility-section"><TrustBadges /></div>
+        <div className="content-visibility-section"><HowItWorks /></div>
+        <div className="content-visibility-section"><FeaturedVenues /></div>
+        <div className="content-visibility-section"><SeoContent /></div>
+        <div className="content-visibility-section"><Testimonials /></div>
       </main>
       <Footer />
       <FloatingActionButton />

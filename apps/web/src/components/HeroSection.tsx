@@ -201,6 +201,7 @@ export default function HeroSection() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="w-full h-full object-cover"
+              loading="lazy"
               alt="Suasana lapangan olahraga modern dengan pencahayaan profesional di Semarang"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmtPRv5VfRtKi1dVKHAhs1eCAd86cmFkXJFyVKHrrBLPfqZoEtkMfLA0bejMZQgtLTdxzNcnkjdfC6hGC1nxeXnLxObnHreOmu2j_Wncx23Ax-9i0Ck4mJh2eUb5z5DE8a9ltSdFh5ZtxoU4XBc1E-jG6hodXfiLKkyUZY8I4Nb0OaO5hP-q1p1V1WEx6liGDiSzYj8erO6azG0mUUOSRPr2bTeRhmb-vi2gu9SPo6mI14Jgd-7x9X5bO0Z5qyMx8dKS4eZ2jp0dFX"
             />

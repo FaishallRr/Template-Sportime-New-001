@@ -373,6 +373,12 @@ type APIResponse struct {
 	Data interface{} `json:"data,omitempty"`
 
 	Error string `json:"error,omitempty"`
+
+	Total int `json:"total,omitempty"`
+
+	Page int `json:"page,omitempty"`
+
+	PerPage int `json:"per_page,omitempty"`
 }
 
 type PaginationRequest struct {

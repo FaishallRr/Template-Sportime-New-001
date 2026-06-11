@@ -83,7 +83,7 @@ export default function RootLayout({
         />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body className="min-h-screen bg-surface font-body text-on-surface kinetic-bg overflow-x-hidden">
+      <body className="min-h-screen bg-surface font-body text-on-surface overflow-x-hidden">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-3 focus:bg-primary focus:text-on-primary focus:rounded-xl focus:font-bold focus:shadow-lg"

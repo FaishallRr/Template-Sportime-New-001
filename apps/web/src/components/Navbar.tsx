@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,7 +13,7 @@ interface NavbarProps {
   variant?: NavVariant;
 }
 
-export default function Navbar({
+const Navbar = memo(function Navbar({
   activePage = "none",
   variant = "full",
 }: NavbarProps) {
@@ -74,10 +74,19 @@ export default function Navbar({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const linkClass = (page: ActivePage) =>
+  const linkClass = useMemo(() => (page: ActivePage) =>
     activePage === page
       ? "text-lime-600 font-bold border-b-2 border-lime-500 hover:text-lime-500 transition-colors duration-300"
-      : "text-slate-600 font-medium hover:text-lime-500 transition-colors duration-300";
+      : "text-slate-600 font-medium hover:text-lime-500 transition-colors duration-300",
+    [activePage],
+  );
+
+  const headerClass = useMemo(() =>
+    scrolled
+      ? "bg-white/80 shadow-md"
+      : "bg-white/40",
+    [scrolled],
+  );
 
   const handleLogout = () => {
     document.cookie = "access_token=; path=/; max-age=0";
@@ -90,7 +99,7 @@ export default function Navbar({
   /* ── Confirmation Navbar ── */
   if (variant === "confirmation") {
     return (
-      <header className="bg-white/60 backdrop-blur-xl shadow-sm fixed top-0 w-full z-50 bg-gradient-to-b from-slate-200/20 to-transparent">
+      <header className="bg-white/60 backdrop-blur-xl shadow-sm fixed top-0 w-full z-50 bg-gradient-to-b from-slate-200/20 to-transparent" style={{ willChange: "transform" }}>
         <div className="flex justify-between items-center w-full px-6 py-4 max-w-screen-2xl mx-auto">
           <Link href="/">
             <span className="text-2xl font-black italic text-slate-900 tracking-tighter cursor-pointer">
@@ -117,9 +126,8 @@ export default function Navbar({
   return (
     <nav
       id="main-navbar"
-      className={`fixed top-0 w-full z-50 transition-all duration-300 backdrop-blur-2xl shadow-sm ${
-        scrolled ? "bg-white/80 shadow-md" : "bg-white/40"
-      }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 backdrop-blur-xl shadow-sm ${headerClass}`}
+      style={{ willChange: "transform" }}
     >
       <div className="flex justify-between items-center w-full px-6 py-4 max-w-screen-2xl mx-auto tracking-tight">
         <div className="flex items-center gap-8">
@@ -296,4 +304,5 @@ export default function Navbar({
       </AnimatePresence>
     </nav>
   );
-}
+});
+export default Navbar;

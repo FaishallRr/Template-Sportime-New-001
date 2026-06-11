@@ -203,6 +203,7 @@ function BookingCard({ booking }: { booking: Booking }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-[800ms] ease-out"
+            loading="lazy"
             alt={booking.venueName}
             src={booking.image}
           />

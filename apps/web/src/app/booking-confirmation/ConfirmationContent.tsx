@@ -239,6 +239,7 @@ function ConfirmationBody() {
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             className="w-full h-full object-cover group-hover/court:scale-110 transition-transform duration-500"
+                            loading="lazy"
                             alt="Padel Court"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCN7Pkj1KMhUctmf03RJMKrFp5OjgfiPwTUzTmPI_gVVXNUlSRDLVeSkh0IfPcTBggFFWjGUccfcbuQqRMi6TBc5l4QdpZrC_Fcp8d0EJmGCu85U5_s3iCgVms86IfK4KOMVi4nts102BoivlsDQpntn7aL3MfWHI2nrET3bVJfk2RajbwoB4J_FUf-DlKGYqsnrgdQPnTwIKc5gTOcrP5aUhWo25wJ-RJ_EGTkpf1zL4wGyuOu2ZjP6eR4be_4At1_7PxjnZ1ZidY"
                           />
@@ -294,6 +295,7 @@ function ConfirmationBody() {
                               <img
                                 src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${booking.verification_code}`}
                                 alt="QR Code"
+                                loading="lazy"
                                 className="w-full h-full object-contain group-hover/qr:scale-105 transition-transform duration-500"
                               />
                             </div>
@@ -377,7 +379,7 @@ function ConfirmationBody() {
                         <div className="mt-4 p-4 bg-white rounded-2xl flex flex-col items-center">
                           <p className="text-xs font-semibold text-gray-600 mb-3 uppercase tracking-wider">Scan QRIS untuk membayar</p>
                           {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={paymentData.qr_url} alt="QRIS" className="w-48 h-48" />
+                          <img src={paymentData.qr_url} alt="QRIS" loading="lazy" className="w-48 h-48" />
                         </div>
                       )}
 
