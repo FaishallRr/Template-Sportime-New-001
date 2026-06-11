@@ -205,7 +205,7 @@ export default function Home() {
       <Navbar />
       <main>
         <div className="content-visibility-section"><HeroSection /></div>
-        <div className="content-visibility-section"><TrustBadges /></div>
+        <TrustBadges />
         <div className="content-visibility-section"><HowItWorks /></div>
         <div className="content-visibility-section"><FeaturedVenues /></div>
         <div className="content-visibility-section"><SeoContent /></div>
