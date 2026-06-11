@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, memo, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import DemoPopup from "@/components/DemoPopup";
 
 type NavVariant = "full" | "checkout" | "confirmation";
 type ActivePage = "explore" | "bookings" | "profile" | "none";
@@ -24,15 +25,7 @@ const Navbar = memo(function Navbar({
   );
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [demoBannerVisible, setDemoBannerVisible] = useState(true);
   const profileRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const dismissed = localStorage.getItem("demo-banner-dismissed");
-    if (dismissed === "true") {
-      setDemoBannerVisible(false);
-    }
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -225,41 +218,6 @@ const Navbar = memo(function Navbar({
         </div>
       </div>
 
-      {/* ── Demo Banner ── */}
-      <AnimatePresence>
-        {demoBannerVisible && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 25 }}
-            className="relative z-50 overflow-hidden bg-gradient-to-r from-amber-500/10 via-yellow-500/10 to-amber-500/10 border-b border-amber-200/30"
-          >
-            <div className="flex items-center justify-between gap-3 px-4 py-2.5 md:px-6 mx-auto max-w-7xl">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <span className="material-symbols-outlined text-amber-600 shrink-0 text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>
-                  info
-                </span>
-                <p className="text-xs md:text-sm font-semibold text-amber-800 truncate">
-                  <span className="hidden sm:inline">🔒 Aplikasi Demo — </span>
-                  Seluruh data bersifat ilustrasi dan tidak terhubung dengan venue aktual.
-                </p>
-              </div>
-              <button
-                onClick={() => {
-                  setDemoBannerVisible(false);
-                  localStorage.setItem("demo-banner-dismissed", "true");
-                }}
-                className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center hover:bg-amber-200/50 transition-colors cursor-pointer"
-                aria-label="Tutup banner demo"
-              >
-                <span className="material-symbols-outlined text-amber-600 text-sm">close</span>
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
@@ -302,6 +260,7 @@ const Navbar = memo(function Navbar({
           </motion.div>
         )}
       </AnimatePresence>
+      <DemoPopup />
     </nav>
   );
 });

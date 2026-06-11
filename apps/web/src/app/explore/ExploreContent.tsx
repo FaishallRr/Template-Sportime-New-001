@@ -101,7 +101,7 @@ function VenueCard({
           : "hover:shadow-xl"
       }`}
     >
-      <div className="relative h-44 overflow-hidden">
+      <div className="relative h-44 overflow-hidden venue-card-img">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -284,7 +284,8 @@ export default function ExploreContent() {
         if (sportFilter) {
           params.set("sport", sportFilter);
         }
-        const url = `/api/venues${params.toString() ? `?${params.toString()}` : ""}`;
+        params.set("limit", "20");
+        const url = `/api/venues?${params.toString()}`;
 
         const res = await fetch(url);
         const data = await res.json();

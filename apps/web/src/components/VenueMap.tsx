@@ -33,6 +33,14 @@ interface VenueMapProps {
   externalUserLocation?: [number, number] | null;
 }
 
+const PRESET_LOCATIONS = [
+  { name: "Tembalang", lat: -7.0548, lng: 110.4403 },
+  { name: "Simpang Lima", lat: -6.9883, lng: 110.4229 },
+  { name: "Pandelan", lat: -7.0039, lng: 110.4095 },
+  { name: "Gombel", lat: -7.0361, lng: 110.4197 },
+  { name: "Ngaliyan", lat: -6.9838, lng: 110.3459 },
+];
+
 export default function VenueMap({
   venues,
   onMarkerClick,
@@ -47,6 +55,8 @@ export default function VenueMap({
   const drawRouteRef = useRef<(lat: number, lng: number, name: string) => void>(() => {});
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [routeInfo, setRouteInfo] = useState<RouteInfo | null>(null);
+  const [showLocationModal, setShowLocationModal] = useState(false);
+  const [pendingRoute, setPendingRoute] = useState<{ lat: number; lng: number; name: string } | null>(null);
 
   const clearRoute = () => {
     if (routeLayerRef.current) {
@@ -55,6 +65,20 @@ export default function VenueMap({
       routeLayerRef.current = null;
     }
     setRouteInfo(null);
+  };
+
+  const setManualLocation = (loc: { lat: number; lng: number; name: string }) => {
+    setUserLocation([loc.lat, loc.lng]);
+    setShowLocationModal(false);
+    toast.success(`Lokasi: ${loc.name}`);
+
+    if (pendingRoute) {
+      const map = mapInstanceRef.current;
+      if (map) {
+        fetchRoute(loc.lat, loc.lng, pendingRoute.lat, pendingRoute.lng, pendingRoute.name, map);
+      }
+      setPendingRoute(null);
+    }
   };
 
   const drawRoute = (destLat: number, destLng: number, destName: string) => {
@@ -67,7 +91,8 @@ export default function VenueMap({
     }
 
     if (!navigator.geolocation) {
-      toast.error("Geolokasi tidak didukung browser Anda");
+      setPendingRoute({ lat: destLat, lng: destLng, name: destName });
+      setShowLocationModal(true);
       return;
     }
 
@@ -80,13 +105,12 @@ export default function VenueMap({
         setUserLocation([startLat, startLng]);
         fetchRoute(startLat, startLng, destLat, destLng, destName, map);
       },
-      (err: GeolocationPositionError) => {
+      () => {
         toast.dismiss(loadingToast);
-        const geolocErrors: Record<number, string> = { 1: "Izin lokasi ditolak", 2: "Posisi tidak tersedia", 3: "Waktu permintaan lokasi habis" };
-        toast.error(`Lokasi tidak dapat diakses. ${geolocErrors[err.code] || "Coba lagi."}`);
-        console.warn("[VenueMap] drawRoute geolocation error:", err.code, err.message);
+        setPendingRoute({ lat: destLat, lng: destLng, name: destName });
+        setShowLocationModal(true);
       },
-      { enableHighAccuracy: false, timeout: 15000 }
+      { enableHighAccuracy: false, timeout: 8000 }
     );
   };
 
@@ -325,7 +349,7 @@ export default function VenueMap({
 
   const handleMyLocation = () => {
     if (!navigator.geolocation) {
-      toast.error("Geolocation is not supported by your browser");
+      setShowLocationModal(true);
       return;
     }
 
@@ -362,12 +386,10 @@ export default function VenueMap({
           userMarker.bindPopup("📍 Lokasi Anda").openPopup();
         }
       },
-      (err: GeolocationPositionError) => {
-        const geolocErrors: Record<number, string> = { 1: "Izin lokasi ditolak", 2: "Posisi tidak tersedia", 3: "Waktu permintaan lokasi habis" };
-        toast.error(`Tidak dapat mengakses lokasi Anda. ${geolocErrors[err.code] || "Coba lagi."}`);
-        console.warn("[VenueMap] handleMyLocation geolocation error:", err.code, err.message);
+      () => {
+        setShowLocationModal(true);
       },
-      { enableHighAccuracy: false, timeout: 15000 }
+      { enableHighAccuracy: false, timeout: 8000 }
     );
   };
 
@@ -377,7 +399,10 @@ export default function VenueMap({
 
       {/* Route Info Panel */}
       {routeInfo && (
-        <div className="absolute top-4 left-4 right-4 md:left-4 md:right-auto z-[1000] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 p-4 max-w-sm">
+        <div
+          className="route-panel-enter absolute top-4 left-4 right-4 md:left-4 md:right-auto z-[1000] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/40 p-4 max-w-sm"
+          style={{ willChange: "transform, opacity" }}
+        >
           <div className="flex items-start justify-between gap-3">
             <div className="flex-1 min-w-0">
               <p className="text-xs text-outline font-medium uppercase tracking-wider mb-0.5">
@@ -416,6 +441,48 @@ export default function VenueMap({
         </button>
       </div>
 
+      {/* Manual Location Modal */}
+      {showLocationModal && (
+        <div
+          className="absolute inset-0 z-[2000] flex items-center justify-center p-4"
+          style={{
+            background: "rgba(0,0,0,0.4)",
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
+          }}
+        >
+          <div
+            className="bg-surface rounded-2xl shadow-2xl max-w-sm w-full p-5 border border-outline-variant/20"
+            style={{
+              animation: "location-modal-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards",
+            }}
+          >
+            <h3 className="text-lg font-bold text-on-surface mb-1">Pilih Lokasi</h3>
+            <p className="text-sm text-on-surface-variant mb-4">
+              Geolokasi tidak tersedia. Pilih lokasi Anda di Semarang:
+            </p>
+            <div className="space-y-2">
+              {PRESET_LOCATIONS.map((loc) => (
+                <button
+                  key={loc.name}
+                  onClick={() => setManualLocation(loc)}
+                  className="w-full text-left px-4 py-3 rounded-xl bg-surface-container-low hover:bg-primary-container hover:text-on-primary-container transition-all font-medium flex items-center gap-3 cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-outline text-lg">location_on</span>
+                  {loc.name}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => { setShowLocationModal(false); setPendingRoute(null); }}
+              className="w-full mt-3 py-2.5 text-sm font-bold text-outline hover:text-on-surface transition-colors cursor-pointer rounded-xl"
+            >
+              Batal
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* User Location Indicator */}
       {userLocation && !routeInfo && (
         <div className="absolute top-4 left-4 z-[1000] bg-white/90 backdrop-blur-xl rounded-full px-4 py-2 shadow-lg flex items-center gap-2 text-sm font-medium">
@@ -423,6 +490,20 @@ export default function VenueMap({
           Lokasi Anda aktif
         </div>
       )}
+
+      <style>{`
+        @keyframes location-modal-in {
+          from { opacity: 0; transform: scale(0.92) translateY(16px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .route-panel-enter {
+          animation: route-panel-in 0.3s ease-out forwards;
+        }
+        @keyframes route-panel-in {
+          from { opacity: 0; transform: translateY(-8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }

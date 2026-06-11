@@ -66,7 +66,7 @@ function VenueCard({ venue, index }: { venue: Venue; index: number }) {
         id={venue.id}
         className="group bg-white/60 backdrop-blur-md rounded-[2rem] overflow-hidden border border-white/40 shadow-sm hover:shadow-2xl transition-all duration-500 tilt-card h-full block cursor-pointer"
       >
-        <div className="relative h-64 overflow-hidden bg-slate-100">
+        <div className="relative h-64 overflow-hidden bg-surface-container-low venue-card-img">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"

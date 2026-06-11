@@ -81,7 +81,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/images/icon-browser.png" sizes="any" />
       </head>
       <body className="min-h-screen bg-surface font-body text-on-surface overflow-x-hidden">
         <a
