@@ -162,7 +162,7 @@ function VenueCard({
           ))}
         </div>
         <Link href={`/venues/${venue.slug || venue.id}`}>
-          <button className="w-full py-3.5 bg-primary text-on-primary rounded-xl font-bold hover:brightness-110 active:brightness-90 transition-all flex justify-center items-center gap-2 group/btn cursor-pointer shadow-lg shadow-primary/25 btn-3d">
+          <button className="w-full py-3.5 bg-primary text-on-primary rounded-xl font-bold hover:brightness-110 active:brightness-90 transition-all flex justify-center items-center gap-2 group/btn cursor-pointer shadow-lg shadow-primary/25 btn-3d min-h-[48px]">
             Booking Sekarang{" "}
             <span className="material-symbols-outlined text-sm group-hover/btn:translate-x-1.5 transition-transform">
               arrow_forward

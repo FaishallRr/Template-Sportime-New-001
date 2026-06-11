@@ -582,7 +582,7 @@ export default function VenueDetailContent() {
                               <div className={`text-[10px] font-bold mt-1 uppercase tracking-wide ${isSelected ? "text-on-primary/80" : "text-slate-400"}`}>
                                 {slot.court_name}
                               </div>
-                              <div className={`text-[10px] font-bold mt-0.5 ${isSelected ? "text-on-primary/70" : "text-primary"}`}>
+                              <div className={`text-xs font-bold mt-0.5 ${isSelected ? "text-on-primary/70" : "text-primary"}`}>
                                 {formatRupiah(slot.price_per_hour)}
                               </div>
                               {isSelected && (
@@ -795,7 +795,7 @@ export default function VenueDetailContent() {
                   href="https://wa.me/62895703047094"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex-1 bg-slate-50 border border-slate-200 py-3 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                  className="flex-1 bg-slate-50 border border-slate-200 py-3 rounded-xl text-sm font-bold text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer flex items-center justify-center gap-1.5 min-h-[44px]"
                 >
                   <span className="material-symbols-outlined text-sm">chat</span> Chat WA
                 </motion.a>
@@ -803,7 +803,7 @@ export default function VenueDetailContent() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   href="tel:+62895703047094"
-                  className="flex-1 bg-slate-50 border border-slate-200 py-3 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                  className="flex-1 bg-slate-50 border border-slate-200 py-3 rounded-xl text-sm font-bold text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer flex items-center justify-center gap-1.5 min-h-[44px]"
                 >
                   <span className="material-symbols-outlined text-sm">call</span> Telpon
                 </motion.a>

@@ -61,7 +61,7 @@ export default function Testimonials() {
           <div className="absolute -top-12 -left-12 w-24 h-24 hero-gradient rounded-full opacity-20 blur-2xl" />
           <motion.h2
             variants={fadeSlideUp}
-            className="text-5xl font-black text-on-surface leading-tight mb-8"
+            className="text-4xl md:text-5xl font-black text-on-surface leading-tight mb-8"
           >
             Apa Kata <br />
             <span className="text-primary-dim">Para Pemain?</span>

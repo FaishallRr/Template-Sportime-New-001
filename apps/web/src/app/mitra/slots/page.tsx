@@ -264,7 +264,7 @@ export default function MitraSlotsPage() {
           </select>
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center justify-center gap-2 bg-slate-900 text-white px-3 md:px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-800 transition-colors cursor-pointer order-3 sm:order-2"
+            className="flex items-center justify-center gap-2 bg-slate-900 text-white px-3 md:px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-800 transition-colors cursor-pointer order-3 sm:order-2 min-h-[44px]"
           >
             <span className="material-symbols-outlined text-lg">schedule</span>
             <span className="hidden sm:inline">Atur Jam Manual</span>
@@ -272,7 +272,7 @@ export default function MitraSlotsPage() {
           </button>
           <button
             onClick={() => handleGenerate("06:00", "22:00")}
-            className="flex items-center justify-center gap-2 bg-lime-500 text-white px-3 md:px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-lime-600 transition-colors cursor-pointer order-1 sm:order-3"
+            className="flex items-center justify-center gap-2 bg-lime-500 text-white px-3 md:px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-lime-600 transition-colors cursor-pointer order-1 sm:order-3 min-h-[44px]"
           >
             <span className="material-symbols-outlined text-lg">
               auto_fix_high
@@ -340,7 +340,7 @@ export default function MitraSlotsPage() {
               </p>
               <button
                 onClick={() => handleGenerate("06:00", "22:00")}
-                className="bg-lime-500 text-white px-4 md:px-6 py-2 md:py-3 rounded-xl text-xs md:text-sm font-bold hover:bg-lime-600"
+                className="bg-lime-500 text-white px-4 md:px-6 py-2 md:py-3 rounded-xl text-xs md:text-sm font-bold hover:bg-lime-600 min-h-[44px]"
               >
                 Terapkan Jadwal Default
               </button>
@@ -408,7 +408,7 @@ export default function MitraSlotsPage() {
                               toggleSlot(slot.id, slot.status)
                             }
                             disabled={slot.status === "dipesan" || !slot.id || isPast}
-                            className={`w-full py-2 md:py-2.5 text-xs font-bold rounded-lg border-2 transition-all cursor-pointer disabled:cursor-not-allowed ${isPast ? "bg-slate-50 border-slate-100 text-slate-300" : statusColors[slot.status]}`}
+                            className={`w-full py-2 md:py-2.5 text-sm font-bold rounded-lg border-2 transition-all cursor-pointer disabled:cursor-not-allowed min-h-[44px] ${isPast ? "bg-slate-50 border-slate-100 text-slate-300" : statusColors[slot.status]}`}
                           >
                             {isPast
                               ? "Lewat"
@@ -439,7 +439,7 @@ export default function MitraSlotsPage() {
               </h3>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-slate-400 hover:text-slate-600 transition-colors"
+                className="text-slate-400 hover:text-slate-600 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
               >
                 <span className="material-symbols-outlined">close</span>
               </button>
@@ -492,13 +492,13 @@ export default function MitraSlotsPage() {
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => handleGenerate(manualTime.start, manualTime.end)}
-                className="flex-1 bg-lime-500 text-white py-3 rounded-xl font-bold hover:bg-lime-600 transition-colors"
+                className="flex-1 bg-lime-500 text-white py-3 rounded-xl font-bold hover:bg-lime-600 transition-colors min-h-[48px]"
               >
                 Simpan Jadwal
               </button>
               <button
                 onClick={() => setShowModal(false)}
-                className="bg-slate-100 text-slate-600 px-6 py-3 rounded-xl font-bold hover:bg-slate-200 transition-colors"
+                className="bg-slate-100 text-slate-600 px-6 py-3 rounded-xl font-bold hover:bg-slate-200 transition-colors min-h-[48px]"
               >
                 Batal
               </button>

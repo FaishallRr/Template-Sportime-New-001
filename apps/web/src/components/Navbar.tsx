@@ -193,7 +193,7 @@ const Navbar = memo(function Navbar({
               </div>
             ) : (
               <Link href="/login">
-                <button className="bg-primary-fixed text-on-primary-fixed px-6 py-2.5 rounded-full font-bold scale-95 active:scale-90 transition-transform shadow-lg shadow-primary/20 btn-3d cursor-pointer">
+                <button className="bg-primary-fixed text-on-primary-fixed px-6 py-2.5 rounded-full font-bold scale-95 active:scale-90 transition-transform shadow-lg shadow-primary/20 btn-3d cursor-pointer min-h-[44px]">
                   Booking Sekarang
                 </button>
               </Link>
@@ -203,7 +203,7 @@ const Navbar = memo(function Navbar({
           {/* Mobile: trigger — avatar (logged in) or hamburger (logged out) */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-100 transition-colors cursor-pointer"
+            className="md:hidden flex items-center justify-center w-11 h-11 rounded-full hover:bg-slate-100 transition-colors cursor-pointer"
             aria-label="Menu"
           >
             {user ? (
@@ -229,19 +229,19 @@ const Navbar = memo(function Navbar({
           >
             <div className="px-6 py-4 space-y-2">
               <Link href="/explore" onClick={() => setMobileOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all duration-200 ${activePage === "explore" ? "text-lime-600 bg-lime-50" : "text-slate-600 hover:bg-slate-50 hover:translate-x-1"}`}>
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all duration-200 min-h-[44px] ${activePage === "explore" ? "text-lime-600 bg-lime-50" : "text-slate-600 hover:bg-slate-50 hover:translate-x-1"}`}>
                 <span className={`material-symbols-outlined text-lg transition-transform duration-200 ${activePage === "explore" ? "" : "group-hover:scale-110"}`}>explore</span>
                 Jelajahi
               </Link>
               {user && (
                 <>
                   <Link href="/my-bookings" onClick={() => setMobileOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all duration-200 ${activePage === "bookings" ? "text-lime-600 bg-lime-50" : "text-slate-600 hover:bg-slate-50 hover:translate-x-1"}`}>
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all duration-200 min-h-[44px] ${activePage === "bookings" ? "text-lime-600 bg-lime-50" : "text-slate-600 hover:bg-slate-50 hover:translate-x-1"}`}>
                     <span className="material-symbols-outlined text-lg">calendar_month</span>
                     Pemesanan Saya
                   </Link>
                   <Link href="/profile" onClick={() => setMobileOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all duration-200 ${activePage === "profile" ? "text-lime-600 bg-lime-50" : "text-slate-600 hover:bg-slate-50 hover:translate-x-1"}`}>
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all duration-200 min-h-[44px] ${activePage === "profile" ? "text-lime-600 bg-lime-50" : "text-slate-600 hover:bg-slate-50 hover:translate-x-1"}`}>
                     <span className="material-symbols-outlined text-lg">person</span>
                     Profil
                   </Link>
@@ -249,7 +249,7 @@ const Navbar = memo(function Navbar({
                   <motion.button
                     whileTap={{ scale: 0.97 }}
                     onClick={() => { handleLogout(); setMobileOpen(false); }}
-                    className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-bold text-red-500 hover:bg-red-50 transition-colors cursor-pointer">
+                    className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-bold text-red-500 hover:bg-red-50 transition-colors cursor-pointer min-h-[44px]">
                     <span className="material-symbols-outlined text-lg">logout</span>
                     Keluar
                   </motion.button>

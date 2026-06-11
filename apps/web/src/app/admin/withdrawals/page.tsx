@@ -195,14 +195,14 @@ export default function AdminWithdrawalsPage() {
                   <div className="flex gap-2 md:shrink-0">
                     <button
                       onClick={() => { setActionTarget(w); setActionType("approve"); }}
-                      className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-500 text-white rounded-xl text-sm font-bold hover:bg-emerald-600 transition-colors cursor-pointer"
+                      className="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-500 text-white rounded-xl text-sm font-bold hover:bg-emerald-600 transition-colors cursor-pointer min-h-[44px]"
                     >
                       <span className="material-symbols-outlined text-lg">check</span>
                       Setujui
                     </button>
                     <button
                       onClick={() => { setActionTarget(w); setActionType("reject"); setRejectReason(""); }}
-                      className="flex items-center gap-1.5 px-4 py-2.5 bg-red-50 text-red-600 rounded-xl text-sm font-bold hover:bg-red-100 transition-colors cursor-pointer"
+                      className="flex items-center gap-1.5 px-4 py-2.5 bg-red-50 text-red-600 rounded-xl text-sm font-bold hover:bg-red-100 transition-colors cursor-pointer min-h-[44px]"
                     >
                       <span className="material-symbols-outlined text-lg">close</span>
                       Tolak
@@ -252,14 +252,14 @@ export default function AdminWithdrawalsPage() {
               <button
                 onClick={() => { setActionTarget(null); setActionType(null); setRejectReason(""); }}
                 disabled={processing}
-                className="flex-1 py-3 px-6 rounded-xl bg-slate-100 text-slate-700 font-bold text-sm hover:bg-slate-200 transition-colors cursor-pointer disabled:opacity-50"
+                className="flex-1 py-3 px-6 rounded-xl bg-slate-100 text-slate-700 font-bold text-sm hover:bg-slate-200 transition-colors cursor-pointer disabled:opacity-50 min-h-[44px]"
               >
                 Batal
               </button>
               <button
                 onClick={handleReject}
                 disabled={processing || !rejectReason.trim()}
-                className="flex-1 py-3 px-6 rounded-xl bg-red-600 text-white font-bold text-sm hover:bg-red-700 transition-colors cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2"
+                className="flex-1 py-3 px-6 rounded-xl bg-red-600 text-white font-bold text-sm hover:bg-red-700 transition-colors cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2 min-h-[44px]"
               >
                 {processing && (
                   <span className="material-symbols-outlined text-base animate-spin">progress_activity</span>

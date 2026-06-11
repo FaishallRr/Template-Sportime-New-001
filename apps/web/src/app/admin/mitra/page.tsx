@@ -150,22 +150,22 @@ export default function AdminMitraPage() {
       render: (_v, row) => (
         <div className="flex gap-2">
           {(String(row.status) === "Pending" || String(row.status) === "Active") && (
-            <button onClick={() => handleAction(String(row.id), "verify")} className="px-3 py-2 bg-emerald-500 text-white rounded-lg text-xs font-bold hover:bg-emerald-600 transition-colors cursor-pointer">
+            <button onClick={() => handleAction(String(row.id), "verify")} className="px-3 py-2.5 bg-emerald-500 text-white rounded-lg text-sm font-bold hover:bg-emerald-600 transition-colors cursor-pointer min-h-[44px]">
               Verifikasi
             </button>
           )}
           {String(row.status) === "Verified" && (
-            <button onClick={() => router.push(`/admin/mitra/${row.id}`)} className="px-3 py-2 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold hover:bg-slate-200 transition-colors cursor-pointer">
+            <button onClick={() => router.push(`/admin/mitra/${row.id}`)} className="px-3 py-2.5 bg-slate-100 text-slate-600 rounded-lg text-sm font-bold hover:bg-slate-200 transition-colors cursor-pointer min-h-[44px]">
               Detail
             </button>
           )}
           {String(row.status) !== "Suspended" && (
-            <button onClick={() => handleAction(String(row.id), "suspend")} className="px-3 py-2 bg-red-50 text-red-500 rounded-lg text-xs font-bold hover:bg-red-100 transition-colors cursor-pointer">
+            <button onClick={() => handleAction(String(row.id), "suspend")} className="px-3 py-2.5 bg-red-50 text-red-500 rounded-lg text-sm font-bold hover:bg-red-100 transition-colors cursor-pointer min-h-[44px]">
               Suspend
             </button>
           )}
           {String(row.status) === "Suspended" && (
-            <button onClick={() => handleAction(String(row.id), "unsuspend")} className="px-3 py-2 bg-blue-50 text-blue-600 rounded-lg text-xs font-bold hover:bg-blue-100 transition-colors cursor-pointer">
+            <button onClick={() => handleAction(String(row.id), "unsuspend")} className="px-3 py-2.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-bold hover:bg-blue-100 transition-colors cursor-pointer min-h-[44px]">
               Aktifkan
             </button>
           )}
@@ -197,7 +197,7 @@ export default function AdminMitraPage() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+              className={`px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${
                 filter === f
                   ? "bg-slate-900 text-white"
                   : "bg-white text-slate-500 hover:bg-slate-100 border border-slate-200"

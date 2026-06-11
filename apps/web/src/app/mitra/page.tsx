@@ -176,7 +176,7 @@ export default function MitraDashboard() {
                     </span>
                   </div>
 
-                  <div className="text-[10px] font-black uppercase tracking-wider shrink-0 bg-white/40 px-3 py-1.5 rounded-xl text-center self-start sm:self-auto border border-white/20">
+                  <div className="text-xs font-black uppercase tracking-wider shrink-0 bg-white/40 px-3 py-1.5 rounded-xl text-center self-start sm:self-auto border border-white/20">
                     {slot.status === "pending_payment"
                       ? "BELUM BAYAR"
                       : slot.status}
@@ -236,7 +236,7 @@ export default function MitraDashboard() {
               </div>
             </div>
             <Link href="/mitra/reviews">
-              <button className="w-full mt-4 bg-lime-600 text-white font-bold py-3 rounded-xl hover:bg-lime-700 transition-colors cursor-pointer">
+              <button className="w-full mt-4 bg-lime-600 text-white font-bold py-3 rounded-xl hover:bg-lime-700 transition-colors cursor-pointer min-h-[48px]">
                 Lacak Semua Ulasan
               </button>
             </Link>
@@ -257,7 +257,7 @@ export default function MitraDashboard() {
               href="https://wa.me/62895703047094"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white text-slate-800 w-full py-3 rounded-xl font-black text-sm hover:bg-slate-100 transition-colors shadow-lg cursor-pointer flex items-center justify-center gap-2"
+              className="bg-white text-slate-800 w-full py-3 rounded-xl font-black text-sm hover:bg-slate-100 transition-colors shadow-lg cursor-pointer flex items-center justify-center gap-2 min-h-[48px]"
             >
               <span
                 className="material-symbols-outlined text-green-500 text-xl"

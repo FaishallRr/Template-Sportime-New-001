@@ -177,7 +177,7 @@ export default function MitraBookingsPage() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-1.5 md:px-4 py-1 md:py-2.5 rounded-lg md:rounded-xl text-[10px] md:text-sm font-bold transition-all cursor-pointer whitespace-nowrap capitalize flex-shrink-0 ${
+              className={`px-1.5 md:px-4 py-1 md:py-2.5 rounded-lg md:rounded-xl text-[10px] md:text-sm font-bold transition-all cursor-pointer whitespace-nowrap capitalize flex-shrink-0 min-h-[44px] ${
                 filter === f
                   ? "bg-slate-900 text-white shadow-md"
                   : "bg-white text-slate-500 hover:bg-slate-100 border border-slate-200"

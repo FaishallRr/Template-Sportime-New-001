@@ -618,7 +618,7 @@ export default function MyBookingsContent() {
                   </p>
                 </div>
 
-                <button className="self-start md:self-auto bg-primary px-6 py-3 rounded-xl text-primary-fixed font-bold flex items-center gap-2 hover:bg-on-primary-container transition-all btn-3d cursor-pointer">
+                <button className="self-start md:self-auto bg-primary px-6 py-3 rounded-xl text-primary-fixed font-bold flex items-center gap-2 hover:bg-on-primary-container transition-all btn-3d cursor-pointer min-h-[44px]">
                   <span className="material-symbols-outlined">add</span>
                   Booking Baru
                 </button>
@@ -669,7 +669,7 @@ export default function MyBookingsContent() {
                       key={tab.key}
                       id={`filter-${tab.key}`}
                       onClick={() => setActiveFilter(tab.key)}
-                      className={`relative flex items-center gap-2 px-5 py-3 rounded-2xl font-bold text-sm transition-all duration-500 cursor-pointer overflow-hidden ${
+                      className={`relative flex items-center gap-2 px-5 py-3 rounded-2xl font-bold text-sm transition-all duration-500 cursor-pointer overflow-hidden min-h-[44px] ${
                         isActive
                           ? "text-primary-fixed shadow-lg shadow-primary/20"
                           : "glass-panel text-on-surface-variant hover:bg-white/60 border border-white/40"
@@ -748,7 +748,7 @@ export default function MyBookingsContent() {
                       Kamu belum punya booking dengan status ini. Yuk booking
                       lapangan olahraga sekarang!
                     </p>
-                    <button className="bg-primary-fixed text-on-primary-fixed px-6 py-3 rounded-xl font-bold btn-3d cursor-pointer hover:shadow-lg hover:shadow-primary-fixed/30 transition-all duration-300 active:scale-95">
+                    <button className="bg-primary-fixed text-on-primary-fixed px-6 py-3 rounded-xl font-bold btn-3d cursor-pointer hover:shadow-lg hover:shadow-primary-fixed/30 transition-all duration-300 active:scale-95 min-h-[44px]">
                       <span className="material-symbols-outlined text-sm mr-1 align-middle">
                         add
                       </span>

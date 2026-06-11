@@ -433,14 +433,14 @@ export default function MitraSettingsPage() {
         <button 
           onClick={handleSave}
           disabled={saving || loading}
-          className="bg-lime-500 text-white px-8 py-3 rounded-xl font-bold hover:bg-lime-600 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-lime-500 text-white px-8 py-3 rounded-xl font-bold hover:bg-lime-600 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
         >
           {saving ? "Menyimpan..." : "Simpan Perubahan"}
         </button>
         <button 
           onClick={() => fetchSettings()}
           disabled={saving || loading}
-          className="bg-slate-100 text-slate-600 px-8 py-3 rounded-xl font-bold hover:bg-slate-200 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-slate-100 text-slate-600 px-8 py-3 rounded-xl font-bold hover:bg-slate-200 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
         >
           Batal
         </button>

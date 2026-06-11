@@ -204,13 +204,13 @@ export default function AdminPromoPage() {
     {
       key: "actions", label: "", render: (_v, row) => (
         <div className="flex gap-1">
-          <button onClick={() => openEdit(row as unknown as Promo)} className="p-1.5 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer" title="Edit">
+          <button onClick={() => openEdit(row as unknown as Promo)} className="p-2 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer" title="Edit">
             <span className="material-symbols-outlined text-slate-400 text-lg">edit</span>
           </button>
-          <button onClick={() => handleToggleActive(row as unknown as Promo)} className="p-1.5 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer" title={row.is_active ? "Nonaktifkan" : "Aktifkan"}>
+          <button onClick={() => handleToggleActive(row as unknown as Promo)} className="p-2 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer" title={row.is_active ? "Nonaktifkan" : "Aktifkan"}>
             <span className={`material-symbols-outlined text-lg ${row.is_active ? "text-emerald-500" : "text-slate-300"}`}>{row.is_active ? "toggle_on" : "toggle_off"}</span>
           </button>
-          <button onClick={() => setDeleteTarget(row as unknown as Promo)} className="p-1.5 hover:bg-red-50 rounded-lg transition-colors cursor-pointer" title="Hapus">
+          <button onClick={() => setDeleteTarget(row as unknown as Promo)} className="p-2 hover:bg-red-50 rounded-lg transition-colors cursor-pointer" title="Hapus">
             <span className="material-symbols-outlined text-red-300 text-lg">delete</span>
           </button>
         </div>
@@ -308,14 +308,14 @@ export default function AdminPromoPage() {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex-1 bg-blue-600 text-white px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2"
+                className="flex-1 bg-blue-600 text-white px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2 min-h-[44px]"
               >
                 {saving && <span className="material-symbols-outlined text-base animate-spin">progress_activity</span>}
                 {editTarget ? "Simpan" : "Buat Promo"}
               </button>
               <button
                 onClick={resetForm}
-                className="px-4 py-2.5 bg-slate-100 text-slate-600 rounded-xl text-sm font-bold hover:bg-slate-200 transition-colors cursor-pointer"
+                className="px-4 py-2.5 bg-slate-100 text-slate-600 rounded-xl text-sm font-bold hover:bg-slate-200 transition-colors cursor-pointer min-h-[44px]"
               >
                 Batal
               </button>
@@ -327,11 +327,11 @@ export default function AdminPromoPage() {
       {!showForm && (
         <button
           onClick={() => setShowForm(true)}
-          className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors cursor-pointer flex items-center gap-2"
-        >
-          <span className="material-symbols-outlined text-lg">add</span>
-          Buat Promo Baru
-        </button>
+className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors cursor-pointer flex items-center gap-2 min-h-[44px]"
+          >
+            <span className="material-symbols-outlined text-lg">add</span>
+            Buat Promo Baru
+          </button>
       )}
 
       {isLoading ? (

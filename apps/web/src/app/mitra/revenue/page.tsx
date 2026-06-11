@@ -176,7 +176,7 @@ export default function MitraRevenuePage() {
         <button
           onClick={handleWithdraw}
           disabled={loading || stats.availableBalance <= 0}
-          className="flex items-center gap-2 bg-lime-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-lime-600 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 bg-lime-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-lime-600 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
         >
           <span className="material-symbols-outlined text-lg">account_balance_wallet</span>
           Tarik Dana
@@ -238,11 +238,11 @@ export default function MitraRevenuePage() {
                   className="w-full bg-lime-400 rounded-t-lg hover:bg-lime-500 transition-colors cursor-pointer relative group"
                   style={{ height: maxVal > 0 ? `${(d.value / maxVal) * 100}%` : '0%' }}
                 >
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-bold z-10">
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-bold z-10">
                     {formatCurrency(d.value)}
                   </div>
                 </div>
-                <span className="text-[10px] font-bold text-slate-400">{d.day}</span>
+                <span className="text-xs font-bold text-slate-400">{d.day}</span>
               </div>
             ))}
           </div>

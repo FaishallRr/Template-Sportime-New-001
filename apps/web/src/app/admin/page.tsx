@@ -240,7 +240,7 @@ export default function AdminDashboard() {
                 a.click();
                 URL.revokeObjectURL(url);
               } catch (e) { console.error(e); }
-            }} className="w-full mt-5 bg-white text-lime-700 font-bold py-3 rounded-xl hover:bg-lime-100 transition-colors border border-lime-200 cursor-pointer shadow-sm text-xs">
+            }} className="w-full mt-5 bg-white text-lime-700 font-bold py-3 rounded-xl hover:bg-lime-100 transition-colors border border-lime-200 cursor-pointer shadow-sm text-sm min-h-[44px]">
               Unduh Seluruh Log Server (CSV)
             </button>
           </div>

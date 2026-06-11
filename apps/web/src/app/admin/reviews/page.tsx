@@ -118,13 +118,13 @@ export default function AdminReviewsPage() {
       <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0">
         <button
           onClick={() => setFilter("all")}
-          className={`px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${filter === "all" ? "bg-slate-900 text-white" : "bg-white text-slate-500 hover:bg-slate-100 border border-slate-200"}`}
+          className={`px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer whitespace-nowrap min-h-[44px] ${filter === "all" ? "bg-slate-900 text-white" : "bg-white text-slate-500 hover:bg-slate-100 border border-slate-200"}`}
         >
           Semua Ulasan
         </button>
         <button
           onClick={() => setFilter("flagged")}
-          className={`px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap ${filter === "flagged" ? "bg-red-500 text-white" : "bg-white text-red-500 hover:bg-red-50 border border-red-200"}`}
+          className={`px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap min-h-[44px] ${filter === "flagged" ? "bg-red-500 text-white" : "bg-white text-red-500 hover:bg-red-50 border border-red-200"}`}
         >
           <span className="material-symbols-outlined text-base">flag</span>
           Ditandai ({stats.flagged_count})
@@ -154,7 +154,7 @@ export default function AdminReviewsPage() {
                       <span className="font-bold text-slate-800">{review.user}</span>
                       <StarRating rating={review.rating} />
                       {review.flagged && (
-                        <span className="px-2 py-0.5 bg-red-100 text-red-600 text-[10px] font-bold rounded-full uppercase">
+                        <span className="px-2 py-0.5 bg-red-100 text-red-600 text-xs font-bold rounded-full uppercase">
                           Ditandai
                         </span>
                       )}
@@ -169,13 +169,13 @@ export default function AdminReviewsPage() {
                 </div>
 
                 <div className="flex gap-2 shrink-0 ml-4">
-                  <button onClick={() => handleAction(review.id, "approve")} className="p-2 rounded-lg hover:bg-emerald-50 text-slate-400 hover:text-emerald-600 transition-colors cursor-pointer" title="Approve">
+                  <button onClick={() => handleAction(review.id, "approve")} className="p-2 rounded-lg hover:bg-emerald-50 text-slate-400 hover:text-emerald-600 transition-colors cursor-pointer min-h-[44px] min-w-[44px]" title="Approve">
                     <span className="material-symbols-outlined">check_circle</span>
                   </button>
-                  <button onClick={() => handleAction(review.id, "flag")} className="p-2 rounded-lg hover:bg-amber-50 text-slate-400 hover:text-amber-600 transition-colors cursor-pointer" title="Flag">
+                  <button onClick={() => handleAction(review.id, "flag")} className="p-2 rounded-lg hover:bg-amber-50 text-slate-400 hover:text-amber-600 transition-colors cursor-pointer min-h-[44px] min-w-[44px]" title="Flag">
                     <span className="material-symbols-outlined">flag</span>
                   </button>
-                  <button onClick={() => handleAction(review.id, "delete")} className="p-2 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-500 transition-colors cursor-pointer" title="Delete">
+                  <button onClick={() => handleAction(review.id, "delete")} className="p-2 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-500 transition-colors cursor-pointer min-h-[44px] min-w-[44px]" title="Delete">
                     <span className="material-symbols-outlined">delete</span>
                   </button>
                 </div>

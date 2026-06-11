@@ -187,14 +187,14 @@ export default function MitraReviewsPage() {
                         <button
                           onClick={() => handleReply(review.id)}
                           disabled={submitting}
-                          className="bg-lime-500 text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-lime-600 transition-colors cursor-pointer disabled:opacity-50"
+                          className="bg-lime-500 text-white px-6 py-2 min-h-[44px] rounded-lg text-sm font-bold hover:bg-lime-600 transition-colors cursor-pointer disabled:opacity-50"
                         >
                           {submitting ? "Mengirim..." : "Kirim Balasan"}
                         </button>
                         <button
                           onClick={() => { setReplyingTo(null); setReplyText(""); }}
                           disabled={submitting}
-                          className="bg-slate-100 text-slate-500 px-6 py-2 rounded-lg text-sm font-bold hover:bg-slate-200 transition-colors cursor-pointer disabled:opacity-50"
+                          className="bg-slate-100 text-slate-500 px-6 py-2 min-h-[44px] rounded-lg text-sm font-bold hover:bg-slate-200 transition-colors cursor-pointer disabled:opacity-50"
                         >
                           Batal
                         </button>
@@ -206,7 +206,7 @@ export default function MitraReviewsPage() {
                   {!review.reply_text && replyingTo !== review.id && (
                     <button
                       onClick={() => setReplyingTo(review.id)}
-                      className="mt-3 flex items-center gap-2 text-sm font-bold text-lime-600 hover:text-lime-700 transition-colors cursor-pointer"
+                      className="mt-3 flex items-center gap-2 text-sm font-bold text-lime-600 hover:text-lime-700 transition-colors cursor-pointer min-h-[44px]"
                     >
                       <span className="material-symbols-outlined text-lg">reply</span>
                       Balas

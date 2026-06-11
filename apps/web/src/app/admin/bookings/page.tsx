@@ -179,7 +179,7 @@ export default function AdminBookingsPage() {
       render: (_v, row) => (
         <div>
           <p className="font-medium text-sm">{String(row.venue)}</p>
-          <p className="text-[11px] text-slate-400">{String(row.court)}</p>
+          <p className="text-xs text-slate-400">{String(row.court)}</p>
         </div>
       ),
     },
@@ -201,7 +201,7 @@ export default function AdminBookingsPage() {
             onClick={() =>
               handleDeleteBooking(String(row.id), String(row.fullId))
             }
-            className="px-3 py-2 bg-red-100 text-red-600 rounded-lg text-xs font-bold hover:bg-red-200 transition-colors cursor-pointer"
+            className="px-3 py-2.5 bg-red-100 text-red-600 rounded-lg text-sm font-bold hover:bg-red-200 transition-colors cursor-pointer min-h-[44px]"
             title="Batalkan Booking"
           >
             <span className="material-symbols-outlined text-sm inline mr-1">
@@ -248,7 +248,7 @@ export default function AdminBookingsPage() {
           <button
             key={f}
             onClick={() => setStatusFilter(f)}
-            className={`px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer capitalize whitespace-nowrap ${
+            className={`px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer capitalize whitespace-nowrap min-h-[44px] ${
               statusFilter === f
                 ? "bg-slate-900 text-white"
                 : "bg-white text-slate-500 hover:bg-slate-100 border border-slate-200"

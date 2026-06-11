@@ -24,7 +24,7 @@ export default function Footer({ variant = "landing" }: FooterProps) {
             </p>
           </div>
           <div>
-            <h6 className="font-bold mb-4 uppercase tracking-widest text-[10px]">
+            <h6 className="font-bold mb-4 uppercase tracking-widest text-xs">
               Informasi
             </h6>
             <ul className="space-y-2">
@@ -47,7 +47,7 @@ export default function Footer({ variant = "landing" }: FooterProps) {
             </ul>
           </div>
           <div>
-            <h6 className="font-bold mb-4 uppercase tracking-widest text-[10px]">
+            <h6 className="font-bold mb-4 uppercase tracking-widest text-xs">
               Mitra
             </h6>
             <ul className="space-y-2">
@@ -70,7 +70,7 @@ export default function Footer({ variant = "landing" }: FooterProps) {
             </ul>
           </div>
           <div>
-            <h6 className="font-bold mb-4 uppercase tracking-widest text-[10px]">
+            <h6 className="font-bold mb-4 uppercase tracking-widest text-xs">
               Legal
             </h6>
             <ul className="space-y-2">
@@ -130,7 +130,7 @@ export default function Footer({ variant = "landing" }: FooterProps) {
               <motion.div
                 whileHover={{ scale: 1.15, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
-                className="w-10 h-10 rounded-full bg-white/50 backdrop-blur-sm flex items-center justify-center text-primary-dim hover:bg-primary-fixed transition-colors shadow-sm cursor-pointer"
+                className="w-11 h-11 rounded-full bg-white/50 backdrop-blur-sm flex items-center justify-center text-primary-dim hover:bg-primary-fixed transition-colors shadow-sm cursor-pointer"
               >
                 <span className="material-symbols-outlined">share</span>
               </motion.div>
@@ -138,7 +138,7 @@ export default function Footer({ variant = "landing" }: FooterProps) {
                 whileHover={{ scale: 1.15, rotate: -5 }}
                 whileTap={{ scale: 0.9 }}
                 href="mailto:jalansukses0507@gmail.com"
-                className="w-10 h-10 rounded-full bg-white/50 backdrop-blur-sm flex items-center justify-center text-primary-dim hover:bg-primary-fixed transition-colors shadow-sm cursor-pointer block"
+                className="w-11 h-11 rounded-full bg-white/50 backdrop-blur-sm flex items-center justify-center text-primary-dim hover:bg-primary-fixed transition-colors shadow-sm cursor-pointer block"
               >
                 <span className="material-symbols-outlined">mail</span>
               </motion.a>
@@ -247,7 +247,7 @@ export default function Footer({ variant = "landing" }: FooterProps) {
                 placeholder="Email"
                 type="text"
               />
-              <button type="submit" className="bg-primary px-4 py-3 rounded-r-xl text-primary-fixed btn-3d cursor-pointer hover:brightness-110 transition-all">
+              <button type="submit" className="bg-primary px-4 py-3 rounded-r-xl text-primary-fixed btn-3d cursor-pointer hover:brightness-110 transition-all min-h-[44px]">
                 <span className="material-symbols-outlined text-sm">send</span>
               </button>
             </form>

@@ -364,12 +364,12 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="flex items-center gap-2 bg-lime-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-lime-600 transition-colors cursor-pointer"
-        >
-          <span className="material-symbols-outlined text-lg">
-            {showForm ? "close" : "add"}
-          </span>
-          {showForm ? "Tutup Form" : "Tambah Lapangan"}
+className="flex items-center gap-2 bg-lime-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-lime-600 transition-colors cursor-pointer min-h-[44px]"
+          >
+            <span className="material-symbols-outlined text-lg">
+              {showForm ? "close" : "add"}
+            </span>
+            {showForm ? "Tutup Form" : "Tambah Lapangan"}
         </button>
       </div>
 
@@ -621,7 +621,7 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
             <button
               type="submit"
               id="btn-simpan-lapangan"
-              className="bg-lime-500 text-white px-8 py-3 rounded-xl font-bold hover:bg-lime-600 transition-colors cursor-pointer"
+              className="bg-lime-500 text-white px-8 py-3 rounded-xl font-bold hover:bg-lime-600 transition-colors cursor-pointer min-h-[48px]"
             >
               {formData.id ? "Perbarui Lapangan" : "Simpan Lapangan"}
             </button>
@@ -643,7 +643,7 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
                   });
                   setIsEditing(false);
                 }}
-              className="bg-slate-100 text-slate-600 px-8 py-3 rounded-xl font-bold hover:bg-slate-200 transition-colors cursor-pointer"
+              className="bg-slate-100 text-slate-600 px-8 py-3 rounded-xl font-bold hover:bg-slate-200 transition-colors cursor-pointer min-h-[48px]"
             >
               Batal
             </button>
@@ -714,7 +714,7 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
                     <p className="text-lg font-black text-slate-800">
                       {venue.courts}
                     </p>
-                    <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+                    <p className="text-xs uppercase tracking-widest text-slate-400 font-bold">
                       Courts
                     </p>
                   </div>
@@ -722,7 +722,7 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
                     <p className="text-lg font-black text-slate-800">
                       {venue.totalBookings}
                     </p>
-                    <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+                    <p className="text-xs uppercase tracking-widest text-slate-400 font-bold">
                       Pesanan
                     </p>
                   </div>
@@ -730,7 +730,7 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
                     <p className="text-lg font-black text-slate-800">
                       {String(venue.pricePerHour).replace("Rp ", "")}
                     </p>
-                    <p className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+                    <p className="text-xs uppercase tracking-widest text-slate-400 font-bold">
                       /Jam
                     </p>
                   </div>
@@ -772,13 +772,13 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
                        setIsEditing(true);
                        window.scrollTo({ top: 0, behavior: "smooth" });
                      }}
-                    className="flex-1 bg-slate-100 text-slate-700 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-200 transition-colors cursor-pointer"
+                    className="flex-1 bg-slate-100 text-slate-700 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-200 transition-colors cursor-pointer min-h-[44px]"
                   >
                     Ubah Data
                   </button>
                   <button
                     onClick={() => handleDelete(venue.id)}
-                    className="px-4 py-2.5 bg-red-50 text-red-500 rounded-xl text-sm font-bold hover:bg-red-100 transition-colors cursor-pointer"
+                    className="px-4 py-2.5 bg-red-50 text-red-500 rounded-xl text-sm font-bold hover:bg-red-100 transition-colors cursor-pointer min-h-[44px]"
                     title="Hapus Lapangan"
                   >
                     <span className="material-symbols-outlined text-lg">
@@ -787,7 +787,7 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
                   </button>
                   <button
                     onClick={() => router.push("/venues/" + (venue.slug || venue.id))}
-                    className="px-4 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-colors cursor-pointer"
+                    className="px-4 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-colors cursor-pointer min-h-[44px]"
                     title="Cek Tampilan"
                   >
                     <span className="material-symbols-outlined text-lg">
