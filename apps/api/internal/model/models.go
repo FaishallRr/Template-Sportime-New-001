@@ -126,7 +126,7 @@ type Venue struct {
 
 	UpdatedAt time.Time `json:"updated_at"`
 
-	// Joined
+	MinPrice int64 `json:"min_price"`
 
 	Courts []Court `json:"courts,omitempty"`
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import StatCard from "@/components/dashboard/StatCard";
+import { CardSkeleton } from "@/components/Skeleton";
 
 type Review = {
   id: string;
@@ -52,6 +53,7 @@ export default function MitraReviewsPage() {
       }
     } catch (e) {
       console.error("Failed to fetch reviews:", e);
+      toast.error("Gagal memuat ulasan.");
     } finally {
       setLoading(false);
     }
@@ -109,9 +111,9 @@ export default function MitraReviewsPage() {
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-slate-100 rounded-2xl h-24 animate-pulse" />
+        <div className="space-y-4">
+          {Array.from({length:3}).map((_,i) => (
+            <CardSkeleton key={i} />
           ))}
         </div>
       ) : (
@@ -136,11 +138,11 @@ export default function MitraReviewsPage() {
       {/* Reviews List */}
       <div className="space-y-4">
         {loading ? (
-          Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="bg-white rounded-2xl p-6 border border-slate-100">
-              <div className="h-24 bg-slate-100 animate-pulse rounded-xl" />
-            </div>
-          ))
+          <div className="space-y-4">
+            {Array.from({length:3}).map((_,i) => (
+              <CardSkeleton key={i} />
+            ))}
+          </div>
         ) : reviews.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-2xl border border-slate-100">
             <span className="material-symbols-outlined text-5xl text-slate-200 mb-4">rate_review</span>
@@ -164,7 +166,6 @@ export default function MitraReviewsPage() {
                   </p>
                   <p className="text-sm text-slate-600 leading-relaxed">{review.comment}</p>
 
-                  {/* Existing Reply */}
                   {review.reply_text && (
                     <div className="mt-4 ml-4 pl-4 border-l-2 border-lime-200 bg-lime-50/50 p-4 rounded-r-xl">
                       <p className="text-xs font-bold text-lime-700 mb-1">Balasan Anda</p>
@@ -172,7 +173,6 @@ export default function MitraReviewsPage() {
                     </div>
                   )}
 
-                  {/* Reply Form */}
                   {!review.reply_text && replyingTo === review.id && (
                     <div className="mt-4 space-y-3">
                       <textarea
@@ -202,7 +202,6 @@ export default function MitraReviewsPage() {
                     </div>
                   )}
 
-                  {/* Reply Button */}
                   {!review.reply_text && replyingTo !== review.id && (
                     <button
                       onClick={() => setReplyingTo(review.id)}
@@ -221,3 +220,11 @@ export default function MitraReviewsPage() {
     </div>
   );
 }
+
+
+
+
+
+
+
+

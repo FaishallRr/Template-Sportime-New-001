@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { CardSkeleton } from "@/components/Skeleton";
 import StatCard from "@/components/dashboard/StatCard";
 import PageHeader from "@/components/dashboard/PageHeader";
 import toast from "react-hot-toast";
@@ -132,7 +133,11 @@ export default function AdminReviewsPage() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-10 text-slate-400">Memuat ulasan...</div>
+        <div className="space-y-4">
+          {Array.from({length:3}).map((_,i) => (
+            <CardSkeleton key={i} />
+          ))}
+        </div>
       ) : filtered.length === 0 ? (
         <div className="text-center py-10 text-slate-400">Belum ada ulasan.</div>
       ) : (

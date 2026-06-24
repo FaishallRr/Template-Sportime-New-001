@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { TableSkeleton } from "@/components/Skeleton";
 import DataTable, { Column } from "@/components/dashboard/DataTable";
 import toast from "react-hot-toast";
 
@@ -206,9 +207,7 @@ export default function MitraBookingsPage() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-10 text-slate-400 font-medium text-sm md:text-base">
-          Memuat pesanan...
-        </div>
+        <TableSkeleton rows={5} />
       ) : (
         <div className="overflow-x-auto">
           <DataTable

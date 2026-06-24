@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
+import { TableSkeleton } from "@/components/Skeleton";
 
 type Venue = {
   id: string | number;
@@ -323,9 +324,7 @@ export default function MitraSlotsPage() {
           className="overflow-x-auto min-h-[300px] scroll-smooth"
         >
           {isLoading ? (
-            <div className="flex items-center justify-center p-12 text-slate-400 font-medium">
-              Memuat Jadwal...
-            </div>
+            <TableSkeleton rows={5} />
           ) : datesSet.length === 0 ? (
             <div className="flex flex-col items-center justify-center p-8 md:p-16 text-center">
               <span className="material-symbols-outlined text-5xl md:text-6xl text-slate-200 mb-4">

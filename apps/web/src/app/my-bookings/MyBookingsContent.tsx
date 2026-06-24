@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingActionButton from "@/components/FloatingActionButton";
@@ -500,6 +501,7 @@ export default function MyBookingsContent() {
       }
     } catch (e) {
       console.error("Failed to fetch bookings:", e);
+      toast.error("Gagal memuat booking.");
     } finally {
       setLoading(false);
     }
@@ -767,3 +769,6 @@ export default function MyBookingsContent() {
     </>
   );
 }
+
+
+

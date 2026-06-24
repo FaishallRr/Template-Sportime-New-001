@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RevealOnScroll from "@/components/RevealOnScroll";
@@ -58,6 +59,7 @@ export default function ProfileContent() {
         }
       } catch (err) {
         console.error("Gagal memuat profil", err);
+        toast.error("Gagal memuat profil.");
       } finally {
         setLoading(false);
       }
@@ -379,3 +381,4 @@ export default function ProfileContent() {
     </>
   );
 }
+

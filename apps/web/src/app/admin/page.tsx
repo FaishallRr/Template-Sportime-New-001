@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { PageSkeleton } from "@/components/Skeleton";
 import StatCard from "@/components/dashboard/StatCard";
 import DataTable, { Column } from "@/components/dashboard/DataTable";
 import PageHeader from "@/components/dashboard/PageHeader";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
 
@@ -61,6 +63,7 @@ export default function AdminDashboard() {
         if (json.success) setData(json.data);
       } catch (e) {
         console.error(e);
+        toast.error("Gagal memuat dashboard.");
       } finally {
         setLoading(false);
       }
@@ -68,7 +71,7 @@ export default function AdminDashboard() {
     fetchDashboard();
   }, [router]);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div></div>;
+  if (loading) return <PageSkeleton />;
 
   const chartData = data?.revenue_chart || [];
   const chartValues = chartData.length > 0 ? chartData.map((d: any) => d.revenue) : [0];
@@ -239,7 +242,10 @@ export default function AdminDashboard() {
                 a.download = "sporttime_audit_logs.csv";
                 a.click();
                 URL.revokeObjectURL(url);
-              } catch (e) { console.error(e); }
+              } catch (e) {
+          console.error(e);
+          toast.error("Gagal mengunduh log.");
+        }
             }} className="w-full mt-5 bg-white text-lime-700 font-bold py-3 rounded-xl hover:bg-lime-100 transition-colors border border-lime-200 cursor-pointer shadow-sm text-sm min-h-[44px]">
               Unduh Seluruh Log Server (CSV)
             </button>
@@ -262,3 +268,5 @@ export default function AdminDashboard() {
     </div>
   );
 }
+
+

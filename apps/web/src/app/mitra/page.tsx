@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import PageHeader from "@/components/dashboard/PageHeader";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { PageSkeleton } from "@/components/Skeleton";
 
 const statusColor: Record<string, string> = {
   confirmed: "bg-emerald-100 border-emerald-300 text-emerald-800 font-bold",
@@ -42,6 +44,7 @@ export default function MitraDashboard() {
         if (json.success) setData(json.data);
       } catch (e) {
         console.error(e);
+        toast.error("Gagal memuat dashboard.");
       } finally {
         setLoading(false);
       }
@@ -49,12 +52,7 @@ export default function MitraDashboard() {
     fetchDashboard();
   }, [router]);
 
-  if (loading)
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-lime-500 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
+  if (loading) return <PageSkeleton />;
 
   const schedules = data?.recent_bookings || [];
 
@@ -273,3 +271,5 @@ export default function MitraDashboard() {
     </div>
   );
 }
+
+

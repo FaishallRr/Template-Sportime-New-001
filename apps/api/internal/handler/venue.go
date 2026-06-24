@@ -24,7 +24,8 @@ func NewVenueHandler(db *sql.DB) *VenueHandler {
 
 const venueColumns = `id, name, COALESCE(slug, ''), address, latitude, longitude, description,
 	facilities, image_urls, status, sport_type, rating_avg, review_count,
-	created_at, updated_at`
+	created_at, updated_at,
+	(SELECT COALESCE(MIN(price_per_hour), 0) FROM courts WHERE venue_id = venues.id) AS min_price`
 
 type venueCacheEntry struct {
 	data      []model.Venue
@@ -145,7 +146,7 @@ func (h *VenueHandler) List(w http.ResponseWriter, r *http.Request) {
 		if err := rows.Scan(&v.ID, &v.Name, &v.Slug, &v.Address,
 			&v.Latitude, &v.Longitude, &v.Description, &facilities, &imageURLs,
 			&v.Status, &v.SportType, &v.RatingAvg, &v.ReviewCount,
-			&v.CreatedAt, &v.UpdatedAt); err != nil {
+			&v.CreatedAt, &v.UpdatedAt, &v.MinPrice); err != nil {
 			continue
 		}
 		v.Facilities = []string(facilities)
@@ -183,7 +184,7 @@ func (h *VenueHandler) List(w http.ResponseWriter, r *http.Request) {
 			if err := cacheRows.Scan(&v.ID, &v.Name, &v.Slug, &v.Address,
 				&v.Latitude, &v.Longitude, &v.Description, &facilities, &imageURLs,
 				&v.Status, &v.SportType, &v.RatingAvg, &v.ReviewCount,
-				&v.CreatedAt, &v.UpdatedAt); err != nil {
+				&v.CreatedAt, &v.UpdatedAt, &v.MinPrice); err != nil {
 				continue
 			}
 			v.Facilities = []string(facilities)
@@ -212,7 +213,7 @@ func (h *VenueHandler) Get(w http.ResponseWriter, r *http.Request) {
 		&v.ID, &v.Name, &v.Slug, &v.Address,
 		&v.Latitude, &v.Longitude, &v.Description, &facilities, &imageURLs,
 		&v.Status, &v.SportType, &v.RatingAvg, &v.ReviewCount,
-		&v.CreatedAt, &v.UpdatedAt,
+		&v.CreatedAt, &v.UpdatedAt, &v.MinPrice,
 	)
 	if err != nil {
 		writeJSON(w, http.StatusNotFound, model.APIResponse{Success: false, Error: "Venue tidak ditemukan"})
@@ -247,7 +248,7 @@ func (h *VenueHandler) GetSlots(w http.ResponseWriter, r *http.Request) {
 
 	rows, err := h.db.QueryContext(ctx, `
 		SELECT s.id, c.id, c.venue_id, s.date, s.start_time, s.end_time, s.status, c.name, c.price_per_hour,
-			c.price_per_hour,
+			c.price_per_hour AS price,
 			CASE WHEN s.status = 'available' THEN true ELSE false END
 		FROM slots s
 		JOIN courts c ON c.id = s.court_id

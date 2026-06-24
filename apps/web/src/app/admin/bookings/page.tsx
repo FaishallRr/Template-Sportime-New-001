@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { TableSkeleton } from "@/components/Skeleton";
 import DataTable, { Column } from "@/components/dashboard/DataTable";
 import PageHeader from "@/components/dashboard/PageHeader";
 import toast from "react-hot-toast";
@@ -260,9 +261,7 @@ export default function AdminBookingsPage() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-10 text-slate-400 font-medium">
-          Memuat booking...
-        </div>
+        <TableSkeleton rows={5} />
       ) : (
         <DataTable
           columns={columns}

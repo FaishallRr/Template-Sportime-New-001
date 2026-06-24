@@ -13,6 +13,7 @@ interface Venue {
   rating_avg: number;
   sport_type?: string;
   image_urls: string[];
+  min_price: number;
 }
 
 const SPORT_LABELS: Record<string, { label: string; icon: string }> = {
@@ -113,7 +114,7 @@ function VenueCard({ venue, index }: { venue: Venue; index: number }) {
                 MULAI DARI
               </p>
               <p className="text-xl font-black text-primary">
-                Rp 80.000
+                Rp {venue.min_price.toLocaleString("id-ID")}
                 <span className="text-sm font-medium text-on-surface-variant">
                   /jam
                 </span>

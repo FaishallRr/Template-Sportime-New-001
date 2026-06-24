@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { PageSkeleton } from "@/components/Skeleton";
 import StatCard from "@/components/dashboard/StatCard";
 import DataTable, { Column } from "@/components/dashboard/DataTable";
 import toast from "react-hot-toast";
@@ -116,6 +117,7 @@ export default function MitraRevenuePage() {
       }
     } catch (e) {
       console.error("Failed to fetch revenue data:", e);
+      toast.error("Gagal memuat data pendapatan.");
     } finally {
       setLoading(false);
     }
@@ -166,6 +168,8 @@ export default function MitraRevenuePage() {
     }
   };
 
+  if (loading) return <PageSkeleton />;
+
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
@@ -184,14 +188,7 @@ export default function MitraRevenuePage() {
       </div>
 
       {/* Revenue Stats */}
-      {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="bg-slate-100 rounded-2xl h-24 animate-pulse" />
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard 
             icon="payments" 
             label="Bulan Ini" 
@@ -204,7 +201,6 @@ export default function MitraRevenuePage() {
           <StatCard icon="savings" label="Total Pendapatan" value={formatCurrency(stats.totalRevenue)} iconBg="bg-emerald-50 text-emerald-600" />
           <StatCard icon="swap_horiz" label="Bisa Ditarik" value={formatCurrency(stats.availableBalance)} iconBg="bg-amber-50 text-amber-600" />
         </div>
-      )}
 
       {/* Revenue Chart */}
       <div className="bg-white rounded-2xl p-6 border border-slate-100">
@@ -222,13 +218,7 @@ export default function MitraRevenuePage() {
             <option value="last">Bulan Lalu</option>
           </select>
         </div>
-        {loading ? (
-          <div className="flex items-end gap-2 h-48">
-            {[...Array(15)].map((_, i) => (
-              <div key={i} className="flex-1 bg-slate-100 rounded-t-lg animate-pulse" style={{ height: `${Math.random() * 80 + 20}%` }} />
-            ))}
-          </div>
-        ) : dailyRevenue.length === 0 ? (
+        {dailyRevenue.length === 0 ? (
           <div className="text-center py-12 text-slate-400">Belum ada data hari ini.</div>
         ) : (
           <div className="flex items-end gap-2 h-48">
@@ -252,13 +242,7 @@ export default function MitraRevenuePage() {
       {/* Withdrawal History */}
       <div className="bg-white rounded-2xl p-6 border border-slate-100">
         <h3 className="font-bold text-slate-900 mb-4">Riwayat Penarikan Dana</h3>
-        {loading ? (
-          <div className="space-y-3">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="h-16 bg-slate-100 rounded-xl animate-pulse" />
-            ))}
-          </div>
-        ) : withdrawals.length === 0 ? (
+        {withdrawals.length === 0 ? (
           <p className="text-slate-400 text-sm text-center py-8">Belum ada riwayat penarikan.</p>
         ) : (
           <div className="space-y-3">
@@ -310,9 +294,7 @@ export default function MitraRevenuePage() {
       {/* Transaction History */}
       <div>
         <h3 className="font-bold text-slate-900 mb-4">Riwayat Transaksi Masuk</h3>
-        {loading ? (
-          <div className="bg-slate-100 rounded-xl h-48 animate-pulse" />
-        ) : transactions.length === 0 ? (
+        {transactions.length === 0 ? (
           <p className="text-slate-400 text-sm text-center py-8 bg-white rounded-xl">Belum ada transaksi.</p>
         ) : (
           <DataTable columns={txnColumns} data={transactions} searchPlaceholder="Cari riwayat transaksi..." />
@@ -321,3 +303,6 @@ export default function MitraRevenuePage() {
     </div>
   );
 }
+
+
+

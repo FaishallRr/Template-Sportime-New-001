@@ -2,6 +2,7 @@
 
 import { useState, useEffect, FormEvent, useRef } from "react";
 import toast from "react-hot-toast";
+import { Skeleton } from "@/components/Skeleton";
 
 type Profile = {
   id: string;
@@ -101,6 +102,7 @@ export default function MitraSettingsPage() {
       }
     } catch (e) {
       console.error("Failed to fetch settings:", e);
+      toast.error("Gagal memuat pengaturan.");
     } finally {
       setLoading(false);
     }
@@ -200,10 +202,10 @@ export default function MitraSettingsPage() {
         <div className="space-y-6">
           <div className="flex items-center gap-6 mb-6">
             <div className="w-20 h-20 rounded-full bg-slate-800 text-white flex items-center justify-center text-2xl font-black">
-              {loading ? "..." : initials}
+              {loading ? <Skeleton className="w-full h-full rounded-full bg-slate-700" /> : initials}
             </div>
             <div>
-              <p className="font-bold text-lg">{loading ? "..." : profile?.full_name}</p>
+              <p className="font-bold text-lg">{loading ? <Skeleton className="h-6 w-48 inline-block" /> : profile?.full_name}</p>
               <p className="text-sm text-slate-400">Mitra sejak {memberSince}</p>
               <input ref={hiddenFileRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
               <button
@@ -448,3 +450,6 @@ export default function MitraSettingsPage() {
     </div>
   );
 }
+
+
+

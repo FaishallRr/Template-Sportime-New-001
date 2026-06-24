@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { TableSkeleton } from "@/components/Skeleton";
 import StatCard from "@/components/dashboard/StatCard";
 import DataTable, { Column } from "@/components/dashboard/DataTable";
 import PageHeader from "@/components/dashboard/PageHeader";
@@ -112,7 +113,7 @@ export default function AdminCashflowPage() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-10 text-slate-400">Memuat data transaksi...</div>
+        <TableSkeleton rows={5} />
       ) : (
         <div>
           <h3 className="font-bold text-slate-900 mb-4">Transaction History</h3>

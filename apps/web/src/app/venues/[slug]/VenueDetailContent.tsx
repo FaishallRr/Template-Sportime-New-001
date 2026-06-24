@@ -239,7 +239,7 @@ export default function VenueDetailContent() {
           setReviews(data.data);
         }
       })
-      .catch(() => {});
+      .catch(() => console.error("Gagal memuat reviews venue"));
   }, [venueId]);
 
   const handleSlotClick = (slotId: string, status: string) => {

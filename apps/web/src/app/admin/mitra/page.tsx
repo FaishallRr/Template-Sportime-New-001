@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { CardSkeleton } from "@/components/Skeleton";
 import DataTable, { Column } from "@/components/dashboard/DataTable";
 import StatCard from "@/components/dashboard/StatCard";
 import PageHeader from "@/components/dashboard/PageHeader";
@@ -210,7 +211,11 @@ export default function AdminMitraPage() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-10 text-slate-400">Memuat data mitra...</div>
+        <div className="space-y-4">
+          {Array.from({length:3}).map((_,i) => (
+            <CardSkeleton key={i} />
+          ))}
+        </div>
       ) : (
         <DataTable columns={columns} data={filtered} searchPlaceholder="Search mitra by name or owner..." />
       )}

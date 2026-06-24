@@ -142,9 +142,6 @@ export default function LoginPage() {
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="text-sm font-bold text-slate-700">Password</label>
-                <Link href="/forgot-password" className="text-xs text-blue-600 hover:underline font-medium">
-                  Lupa password?
-                </Link>
               </div>
               <div className="flex items-center gap-3 px-4 py-3 bg-slate-50 rounded-2xl border border-transparent focus-within:ring-2 focus-within:ring-blue-100 transition-all">
                 <span className="material-symbols-outlined text-slate-400 text-xl">lock</span>

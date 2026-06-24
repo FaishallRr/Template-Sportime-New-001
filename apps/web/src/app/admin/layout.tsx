@@ -34,7 +34,7 @@ export default function AdminLayout({
             reviews: json.data.flagged_reviews || 0,
           });
         }
-      } catch {}
+      } catch (e) { console.error("Gagal fetch badge admin:", e); }
     };
     fetchBadges();
     const interval = setInterval(fetchBadges, 60000);

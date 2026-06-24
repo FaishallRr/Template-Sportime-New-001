@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { TableSkeleton } from "@/components/Skeleton";
 import StatCard from "@/components/dashboard/StatCard";
 import DataTable, { Column } from "@/components/dashboard/DataTable";
 import PageHeader from "@/components/dashboard/PageHeader";
@@ -335,7 +336,7 @@ className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover
       )}
 
       {isLoading ? (
-        <div className="text-center py-16 text-slate-400">Memuat data promo...</div>
+        <TableSkeleton rows={4} />
       ) : promos.length === 0 ? (
         <div className="text-center py-16 bg-white rounded-2xl border border-slate-100">
           <span className="material-symbols-outlined text-5xl text-slate-300" style={{ fontVariationSettings: "'FILL' 1" }}>confirmation_number</span>
