@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"strconv"
 	"syscall"
 	"time"
 
@@ -45,12 +44,7 @@ func main() {
 	cronSvc := service.NewCronService(db)
 	cronSvc.StartAll()
 
-	rps := 100.0
-	if v := os.Getenv("RATE_LIMIT_RPS"); v != "" {
-		if parsed, err := strconv.ParseFloat(v, 64); err == nil {
-			rps = parsed
-		}
-	}
+	rps := float64(cfg.Security.RateLimitRPS) // from config (default 10)
 	limiter := middleware.NewRateLimiter(int(rps))
 
 	authUser := func(h http.HandlerFunc) http.HandlerFunc {
